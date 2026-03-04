@@ -9,7 +9,6 @@ import { PhotographyBreak } from '@/components/sections/PhotographyBreak'
 import { Archive } from '@/components/sections/Archive'
 import { AnnualBook } from '@/components/sections/AnnualBook'
 import { Testimonials } from '@/components/sections/Testimonials'
-import { Pricing } from '@/components/sections/Pricing'
 import { Closing } from '@/components/sections/Closing'
 
 export default function HomePage() {
@@ -26,7 +25,6 @@ export default function HomePage() {
         <Archive />
         <AnnualBook />
         <Testimonials />
-        <Pricing />
         <Closing />
       </main>
       <Footer />

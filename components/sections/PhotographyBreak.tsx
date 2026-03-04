@@ -1,32 +1,28 @@
-import Image from 'next/image'
-
 export function PhotographyBreak() {
   return (
-    <div className="relative h-[280px] md:h-[400px] overflow-hidden">
-      <Image
-        src="https://images.unsplash.com/photo-1520264517-8bde5e35f3e2?w=1600&q=80"
-        alt="A person in the evening, phone in hand, reading something that matters to them"
-        fill
-        className="object-cover object-[center_40%]"
-        sizes="100vw"
-      />
-      {/* Gradient overlay */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            'linear-gradient(to bottom, transparent 30%, rgba(44,36,22,0.7) 100%)',
-        }}
-      />
-      {/* Text overlay */}
-      <div className="absolute bottom-0 left-0 right-0 px-6 md:px-14 pb-11">
-        <p
-          className="font-cormorant italic font-normal text-warm-white"
-          style={{ fontSize: 'clamp(22px, 3vw, 32px)' }}
+    <section
+      className="flex items-center justify-center text-center px-8 py-24"
+      style={{
+        background: '#EDE6D6',
+        backgroundImage: `radial-gradient(ellipse 80% 60% at 50% 50%, rgba(196,84,26,0.06) 0%, transparent 70%)`,
+        borderTop: '1px solid rgba(44,36,22,0.07)',
+        borderBottom: '1px solid rgba(44,36,22,0.07)',
+      }}
+    >
+      <div style={{ maxWidth: 680 }}>
+        <p className="font-dm-sans font-light text-charcoal-lt uppercase tracking-[0.08em] mb-6" style={{ fontSize: 11 }}>
+          For the parent 800 miles from home
+        </p>
+        <blockquote
+          className="font-cormorant font-normal italic text-charcoal"
+          style={{ fontSize: 'clamp(28px, 3.5vw, 48px)', lineHeight: 1.2 }}
         >
-          For the parent 800 miles from home.
+          &ldquo;I travel constantly for work. The fifteen minutes we spend on Kinely&apos;s question every night is the only time I feel like I&apos;m actually home.&rdquo;
+        </blockquote>
+        <p className="font-dm-sans font-light text-charcoal-lt mt-6" style={{ fontSize: 13 }}>
+          — David K., father · Chicago, Illinois
         </p>
       </div>
-    </div>
+    </section>
   )
 }

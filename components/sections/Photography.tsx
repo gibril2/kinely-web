@@ -1,47 +1,27 @@
-import Image from 'next/image'
-
-const photos = [
-  {
-    src: 'https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=800&q=80',
-    alt: 'Family gathered around a dinner table in warm evening light',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1476703993599-0035a21b17a9?w=800&q=80',
-    alt: 'Parent and child in genuine conversation, warm natural light',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=800&q=80',
-    alt: 'Hands holding an open hardcover book in warm light',
-  },
-]
-
 export function Photography() {
+  const stats = [
+    { num: '4,200+', label: 'families on the waitlist' },
+    { num: '365', label: 'questions curated each year' },
+    { num: '3 min', label: 'average daily time to answer' },
+    { num: '1', label: 'question that changes everything' },
+  ]
+
   return (
-    <div>
-      <div className="grid md:grid-cols-3 h-[220px] md:h-[500px]">
-        {photos.map(({ src, alt }) => (
-          <div key={src} className="relative overflow-hidden">
-            <Image
-              src={src}
-              alt={alt}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 33vw"
-            />
-          </div>
-        ))}
+    <section style={{ background: '#2C2416', padding: '56px 56px', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+      <div className="max-w-content mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+          {stats.map(({ num, label }, i) => (
+            <div
+              key={num}
+              className="text-center"
+              style={{ borderLeft: i > 0 ? '1px solid rgba(255,255,255,0.06)' : 'none', paddingLeft: i > 0 ? 32 : 0 }}
+            >
+              <div className="font-cormorant font-normal text-warm-white" style={{ fontSize: 44, lineHeight: 1 }}>{num}</div>
+              <div className="font-dm-sans font-light mt-2" style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.04em' }}>{label}</div>
+            </div>
+          ))}
+        </div>
       </div>
-      <div
-        className="text-center py-6"
-        style={{ borderBottom: '1px solid rgba(44,36,22,0.07)' }}
-      >
-        <p
-          className="font-dm-sans font-light text-charcoal-lt uppercase tracking-[0.06em]"
-          style={{ fontSize: 13 }}
-        >
-          The question. The answers. The book.
-        </p>
-      </div>
-    </div>
+    </section>
   )
 }
