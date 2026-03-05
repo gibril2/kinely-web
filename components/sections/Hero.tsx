@@ -17,19 +17,16 @@ export function Hero() {
             <span className="font-dm-sans font-medium text-[11px] uppercase tracking-[0.1em] text-ember">Now accepting founding families</span>
           </div>
 
-          {/* H1 — crystal clear value prop */}
+          {/* H1 — core differentiator: everyone answers */}
           <h1 className="font-cormorant font-normal text-charcoal mb-5" style={{ fontSize: 'clamp(44px, 4.5vw, 66px)', lineHeight: 1.05 }}>
             One question.<br />
             Every day.<br />
-            <em className="italic text-ember">Your whole family.</em>
+            <em className="italic text-ember">Every single person answers.</em>
           </h1>
 
-          {/* Product explanation — first mention of what it actually IS */}
-          <p className="font-dm-sans font-normal text-charcoal-mid mb-3" style={{ fontSize: 16, lineHeight: 1.65 }}>
-            Kinely is a family app that sends one thoughtful question to every family member&apos;s phone each day.
-          </p>
-          <p className="font-dm-sans font-light text-charcoal-lt mb-10" style={{ fontSize: 15, lineHeight: 1.75 }}>
-            Everyone answers in seconds. Every answer is saved forever. At year&apos;s end, it all becomes a hardcover book delivered to your door.
+          {/* Subhead — differentiator + book in one breath */}
+          <p className="font-dm-sans font-light text-charcoal-lt mb-10" style={{ fontSize: 16, lineHeight: 1.75 }}>
+            Kinely sends one thoughtful question to your whole family simultaneously. Everyone answers their own way — text, voice, or photo. Nothing is forgotten. At year&apos;s end, it becomes a hardcover book delivered to your door.
           </p>
 
           {/* CTA */}

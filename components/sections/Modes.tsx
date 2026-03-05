@@ -211,7 +211,7 @@ export function Modes() {
         >
           At the table. Across the world.
           <br />
-          <em className="italic text-ember">Built to disappear when it matters most.</em>
+          <em className="italic text-ember">Gone before the conversation starts.</em>
         </h2>
 
         {/* Top row: 2 cols */}
