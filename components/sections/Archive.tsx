@@ -62,11 +62,11 @@ export function Archive() {
                 paddingLeft: 12,
               }}
             >
-              Most of what makes your family
+              The conversations that shape
               <br />
-              who it is will disappear.
+              who your family becomes —
               <br />
-              Kinely is how you save it.
+              <em style={{ color: '#C4541A' }}>now you&apos;ll always have them.</em>
             </blockquote>
           </div>
 
@@ -106,8 +106,8 @@ export function Archive() {
             </p>
             <div className="flex flex-col gap-2">
               {[
-                { initial: 'M', name: 'Mom', text: 'Parallel parking. Nobody in this family knows how good I am.' },
-                { initial: 'E', name: 'Emma · was 13', text: 'Memorizing song lyrics after one listen' },
+                { initial: 'M', name: 'Mom', text: "Parallel parking — I've never once needed a three-point turn in my life. Your dad still doesn't believe me. Also, I'm pretty good at knowing when someone in this family needs a hug before they know it themselves." },
+                { initial: 'E', name: 'Emma · was 13', text: "I can memorize a full song after hearing it twice. I think it's because music is how I feel things. On the way to school last Tuesday I learned all of Driver's License before we hit the highway." },
               ].map(({ initial, name, text }) => (
                 <div
                   key={name}
@@ -123,7 +123,7 @@ export function Archive() {
                     <p className="font-dm-sans font-medium text-white/60" style={{ fontSize: 10, marginBottom: 2 }}>
                       {name}
                     </p>
-                    <p className="font-dm-sans font-light text-white/45" style={{ fontSize: 12, lineHeight: 1.5 }}>
+                    <p className="font-dm-sans font-light text-white/45" style={{ fontSize: 12, lineHeight: 1.7 }}>
                       {text}
                     </p>
                   </div>
@@ -175,7 +175,7 @@ export function Archive() {
                   Jake · was 8
                 </p>
                 <p className="font-dm-sans font-light text-white/45" style={{ fontSize: 12, lineHeight: 1.5 }}>
-                  When dad came home early and we watched movies all day
+                  When dad came home three days early from his work trip and surprised us. We didn&apos;t even do anything special — just pizza and blankets on the living room floor. But it felt like the best night of the whole year.
                 </p>
               </div>
             </div>
