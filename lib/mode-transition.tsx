@@ -4,11 +4,12 @@ import { createContext, useContext, useState, type ReactNode } from 'react'
 
 interface TxState {
   rect: DOMRect
+  color: string
 }
 
 interface TxContextType {
   tx: TxState | null
-  startTransition: (rect: DOMRect) => void
+  startTransition: (rect: DOMRect, color: string) => void
   clearTransition: () => void
 }
 
@@ -20,7 +21,7 @@ export function ModeTransitionProvider({ children }: { children: ReactNode }) {
   return (
     <TxContext.Provider value={{
       tx,
-      startTransition: (rect) => setTx({ rect }),
+      startTransition: (rect, color) => setTx({ rect, color }),
       clearTransition: () => setTx(null),
     }}>
       {children}

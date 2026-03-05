@@ -27,7 +27,6 @@ export function ModeTransitionOverlay() {
         width: '100vw',
         height: '100vh',
         borderRadius: 0,
-        // Stay opaque while box expands, then quick fade revealing rendered page
         opacity: [1, 1, 0],
       }}
       transition={{
@@ -38,7 +37,7 @@ export function ModeTransitionOverlay() {
       style={{
         position: 'fixed',
         zIndex: 9999,
-        background: '#F7F2EA',
+        background: tx.color,
         pointerEvents: 'none',
       }}
       onAnimationComplete={clearTransition}

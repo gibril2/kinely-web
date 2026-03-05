@@ -1,7 +1,15 @@
+'use client'
+
+import { useRef } from 'react'
+import { useRouter } from 'next/navigation'
 import { SectionKicker } from '../ui/SectionKicker'
 import Link from 'next/link'
 import { Flame, Plane, Star, Heart, Sparkles, UserPlus } from 'lucide-react'
 import { GrandparentsModeCard } from '../ui/GrandparentsModeCard'
+import { useModeTransition } from '@/lib/mode-transition'
+
+const CARD_BG = '#F7F2EA'
+const GUEST_BG = '#2C2416'
 
 const topModes = [
   {
@@ -49,31 +57,60 @@ const bottomModes = [
   },
 ]
 
-function ModeCard({ slug, icon, iconBg, title, body, chip }: { slug: string; icon: React.ReactNode; iconBg: React.ReactNode; title: string; body: string; chip: string }) {
+function ModeCard({
+  slug,
+  icon,
+  iconBg,
+  title,
+  body,
+  chip,
+}: {
+  slug: string
+  icon: React.ReactNode
+  iconBg: React.ReactNode
+  title: string
+  body: string
+  chip: string
+}) {
+  const router = useRouter()
+  const cardRef = useRef<HTMLDivElement>(null)
+  const { startTransition } = useModeTransition()
+
+  function handleClick() {
+    if (!cardRef.current) return
+    const rect = cardRef.current.getBoundingClientRect()
+    startTransition(rect, CARD_BG)
+    router.push(`/modes/${slug}`)
+  }
+
   return (
-    <Link
-      href={`/modes/${slug}`}
-      className="group relative overflow-hidden flex flex-col transition-all duration-200 hover:-translate-y-1"
+    <div
+      ref={cardRef}
+      onClick={handleClick}
+      className="group relative overflow-hidden flex flex-col cursor-pointer"
       style={{
-        background: '#F7F2EA',
+        background: CARD_BG,
         borderRadius: 24,
         padding: '40px 36px',
         boxShadow: '0 2px 20px rgba(44,36,22,0.06)',
-        textDecoration: 'none',
+        transition: 'transform 200ms ease, box-shadow 200ms ease',
+        userSelect: 'none',
+      }}
+      onMouseEnter={e => {
+        e.currentTarget.style.transform = 'translateY(-4px)'
+        e.currentTarget.style.boxShadow = '0 8px 32px rgba(44,36,22,0.10)'
+      }}
+      onMouseLeave={e => {
+        e.currentTarget.style.transform = 'translateY(0)'
+        e.currentTarget.style.boxShadow = '0 2px 20px rgba(44,36,22,0.06)'
       }}
     >
       {iconBg}
       <div className="mb-5">{icon}</div>
-      <h3
-        className="font-cormorant font-medium text-charcoal mb-4"
-        style={{ fontSize: 28 }}
-      >
+      <h3 className="font-cormorant font-medium text-charcoal mb-4" style={{ fontSize: 28 }}>
         {title}
       </h3>
-      <p
-        className="font-dm-sans font-light text-charcoal-lt mb-6 flex-1"
-        style={{ fontSize: 14, lineHeight: 1.75 }}
-      >
+      <p className="font-dm-sans font-light text-charcoal-lt mb-6 flex-1" style={{ fontSize: 14, lineHeight: 1.75 }}>
         {body}
       </p>
       <div className="flex items-center justify-between">
@@ -87,7 +124,74 @@ function ModeCard({ slug, icon, iconBg, title, body, chip }: { slug: string; ico
           See how it works →
         </span>
       </div>
-    </Link>
+    </div>
+  )
+}
+
+function GuestModeCard() {
+  const router = useRouter()
+  const cardRef = useRef<HTMLDivElement>(null)
+  const { startTransition } = useModeTransition()
+
+  function handleClick() {
+    if (!cardRef.current) return
+    const rect = cardRef.current.getBoundingClientRect()
+    startTransition(rect, GUEST_BG)
+    router.push('/modes/guest')
+  }
+
+  return (
+    <div
+      ref={cardRef}
+      onClick={handleClick}
+      className="group relative overflow-hidden flex flex-col md:flex-row md:items-center gap-8 cursor-pointer"
+      style={{
+        background: GUEST_BG,
+        borderRadius: 24,
+        padding: '40px 44px',
+        boxShadow: '0 2px 20px rgba(44,36,22,0.12)',
+        transition: 'transform 200ms ease, box-shadow 200ms ease',
+        userSelect: 'none',
+      }}
+      onMouseEnter={e => {
+        e.currentTarget.style.transform = 'translateY(-4px)'
+        e.currentTarget.style.boxShadow = '0 8px 40px rgba(44,36,22,0.20)'
+      }}
+      onMouseLeave={e => {
+        e.currentTarget.style.transform = 'translateY(0)'
+        e.currentTarget.style.boxShadow = '0 2px 20px rgba(44,36,22,0.12)'
+      }}
+    >
+      <UserPlus size={100} className="absolute top-4 right-8 text-white opacity-[0.03]" />
+      <div className="flex-shrink-0">
+        <UserPlus size={28} className="text-ember-light mb-5" />
+        <h3
+          className="font-cormorant font-medium text-warm-white mb-4"
+          style={{ fontSize: 28 }}
+        >
+          Guest Mode
+        </h3>
+        <span
+          className="inline-block font-dm-sans font-medium text-ember-light text-[11px] uppercase tracking-[0.06em] px-4 py-2 rounded-chip"
+          style={{ background: 'rgba(196,84,26,0.2)' }}
+        >
+          For guests &amp; gatherings
+        </span>
+      </div>
+      <p
+        className="font-dm-sans font-light flex-1"
+        style={{ fontSize: 15, lineHeight: 1.8, color: 'rgba(255,255,255,0.5)', maxWidth: 600 }}
+      >
+        Someone&apos;s joining you for the holidays. Send them a guest link — they answer tonight&apos;s question right alongside your family. Their answer is saved in your archive, marked as{' '}
+        <em style={{ color: 'rgba(255,255,255,0.7)', fontStyle: 'italic' }}>
+          &ldquo;Guest · Sarah · Thanksgiving 2025.&rdquo;
+        </em>{' '}
+        No account needed. Just connection.
+      </p>
+      <span className="font-dm-sans font-medium text-[13px] text-ember-light group-hover:text-ember transition-colors flex-shrink-0">
+        See how it works →
+      </span>
+    </div>
   )
 }
 
@@ -113,7 +217,7 @@ export function Modes() {
         {/* Top row: 2 cols */}
         <div className="grid md:grid-cols-2 gap-5 mb-5">
           {topModes.map((mode) => (
-            <ModeCard key={mode.title} {...mode} />
+            <ModeCard key={mode.slug} {...mode} />
           ))}
         </div>
 
@@ -123,50 +227,13 @@ export function Modes() {
             mode.slug === 'grandparents' ? (
               <GrandparentsModeCard key="grandparents" />
             ) : (
-              <ModeCard key={mode.title} {...mode} />
+              <ModeCard key={mode.slug} {...mode} />
             )
           )}
         </div>
 
         {/* Guest Mode: full-width featured card */}
-        <Link
-          href="/modes/guest"
-          className="group relative overflow-hidden flex flex-col md:flex-row md:items-center gap-8 transition-all duration-200 hover:-translate-y-1"
-          style={{
-            background: '#2C2416',
-            borderRadius: 24,
-            padding: '40px 44px',
-            boxShadow: '0 2px 20px rgba(44,36,22,0.12)',
-            textDecoration: 'none',
-            display: 'flex',
-          }}
-        >
-          <UserPlus size={100} className="absolute top-4 right-8 text-white opacity-[0.03]" />
-          <div className="flex-shrink-0">
-            <UserPlus size={28} className="text-ember-light mb-5" />
-            <h3
-              className="font-cormorant font-medium text-warm-white mb-4"
-              style={{ fontSize: 28 }}
-            >
-              Guest Mode
-            </h3>
-            <span
-              className="inline-block font-dm-sans font-medium text-ember-light text-[11px] uppercase tracking-[0.06em] px-4 py-2 rounded-chip"
-              style={{ background: 'rgba(196,84,26,0.2)' }}
-            >
-              For guests &amp; gatherings
-            </span>
-          </div>
-          <p
-            className="font-dm-sans font-light flex-1"
-            style={{ fontSize: 15, lineHeight: 1.8, color: 'rgba(255,255,255,0.5)', maxWidth: 600 }}
-          >
-            Someone&apos;s joining you for the holidays. Send them a guest link — they answer tonight&apos;s question right alongside your family. Their answer is saved in your archive, marked as <em style={{ color: 'rgba(255,255,255,0.7)', fontStyle: 'italic' }}>&ldquo;Guest · Sarah · Thanksgiving 2025.&rdquo;</em> No account needed. Just connection.
-          </p>
-          <span className="font-dm-sans font-medium text-[13px] text-ember-light group-hover:text-ember transition-colors flex-shrink-0">
-            See how it works →
-          </span>
-        </Link>
+        <GuestModeCard />
 
         {/* Mid-section CTA */}
         <div className="flex justify-end mt-8">

@@ -88,6 +88,7 @@ const modes = {
       { num: '04', title: 'Their answer is saved in your archive', body: 'Tagged "Guest · Sarah · Thanksgiving 2025" in your archive forever. They can also try Kinely for themselves — their first experience of what it feels like.' },
     ],
     accent: '#4A7FA5',
+    dark: true,
   },
 }
 
@@ -112,30 +113,44 @@ export default async function ModePage({ params }: { params: Promise<{ slug: str
           {/* Left: text */}
           <div
             className="flex flex-col justify-center px-14 py-20 order-last md:order-first"
-            style={{ background: '#F7F2EA', borderRight: '1px solid rgba(44,36,22,0.07)' }}
+            style={{
+              background: mode.slug === 'guest' ? '#2C2416' : '#F7F2EA',
+              borderRight: mode.slug === 'guest' ? '1px solid rgba(255,255,255,0.06)' : '1px solid rgba(44,36,22,0.07)',
+            }}
           >
             <Link
               href="/#modes"
-              className="inline-flex items-center gap-2 font-dm-sans font-medium text-[11px] text-charcoal-lt hover:text-charcoal transition-colors mb-10 self-start"
+              className="inline-flex items-center gap-2 font-dm-sans font-medium text-[11px] transition-colors mb-10 self-start"
+              style={{ color: mode.slug === 'guest' ? 'rgba(255,255,255,0.35)' : undefined }}
             >
               ← All modes
             </Link>
 
-            <div className="flex items-center gap-3 mb-6 text-ember">
-              <div className="w-[18px] h-px bg-ember" />
+            <div className="flex items-center gap-3 mb-6" style={{ color: '#C4541A' }}>
+              <div className="w-[18px] h-px" style={{ background: '#C4541A' }} />
               <span className="font-dm-sans font-medium text-[11px] uppercase tracking-[0.1em]">{mode.chip}</span>
             </div>
 
             <h1
-              className="font-cormorant font-normal text-charcoal mb-6"
-              style={{ fontSize: 'clamp(38px, 4vw, 58px)', lineHeight: 1.05, maxWidth: 480 }}
+              className="font-cormorant font-normal mb-6"
+              style={{
+                fontSize: 'clamp(38px, 4vw, 58px)',
+                lineHeight: 1.05,
+                maxWidth: 480,
+                color: mode.slug === 'guest' ? '#FDFAF5' : '#2C2416',
+              }}
             >
               {mode.headline}
             </h1>
 
             <p
-              className="font-dm-sans font-light text-charcoal-lt mb-10"
-              style={{ fontSize: 16, lineHeight: 1.8, maxWidth: 460 }}
+              className="font-dm-sans font-light mb-10"
+              style={{
+                fontSize: 16,
+                lineHeight: 1.8,
+                maxWidth: 460,
+                color: mode.slug === 'guest' ? 'rgba(255,255,255,0.55)' : undefined,
+              }}
             >
               {mode.subhead}
             </p>

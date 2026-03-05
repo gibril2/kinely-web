@@ -13,7 +13,7 @@ export function GrandparentsModeCard() {
   function handleClick() {
     if (!cardRef.current) return
     const rect = cardRef.current.getBoundingClientRect()
-    startTransition(rect)
+    startTransition(rect, '#F7F2EA')
     // Navigate immediately — the overlay covers the screen while the new page loads
     router.push('/modes/grandparents')
   }
