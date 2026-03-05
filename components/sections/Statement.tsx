@@ -29,6 +29,9 @@ export function Statement() {
         <p className="font-dm-sans font-normal text-charcoal-mid" style={{ fontSize: 16, lineHeight: 1.75 }}>
           Kinely starts the conversation — every single day — and makes sure nothing is ever lost.
         </p>
+        <p className="font-dm-sans font-light text-charcoal-lt" style={{ fontSize: 14, lineHeight: 1.75, marginTop: 4 }}>
+          Kinely is designed to be put down. Three minutes a day. Then back to your family.
+        </p>
       </div>
     </section>
   )

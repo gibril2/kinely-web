@@ -72,7 +72,7 @@ const tiers = [
 ]
 
 const faqs = [
-  { q: 'When does Kinely launch?', a: "We're targeting a mid-2025 launch. Founding family purchases are pre-orders. If we don't ship by December 31, 2025, you receive a full refund, no questions asked." },
+  { q: 'When does Kinely launch?', a: "We're targeting launch in 2026. Founding family purchases are pre-orders. If we don't ship, you receive a full refund, no questions asked." },
   { q: 'What happens after the founding year?', a: 'At the end of your founding year, you can renew at standard pricing ($96/year) or cancel. Founding Circle members receive a permanent 50% discount on all future plans.' },
   { q: 'Can I upgrade my tier later?', a: "Yes. You can upgrade to a higher tier at any time and we'll apply a prorated credit. You cannot downgrade your founding tier after the pre-sale closes." },
   { q: 'How many family members can join?', a: 'Kinely is designed for families of any size. There is no per-person charge. Add your whole household, your parents, your grown children who have moved out — all under one membership.' },
@@ -158,7 +158,7 @@ export default function PricingPage() {
             <div className="flex items-center gap-2 mt-8">
               <Lock size={13} className="text-charcoal-lt flex-shrink-0" />
               <p className="font-dm-sans font-light text-charcoal-lt" style={{ fontSize: 12 }}>
-                Secure payments via Stripe · No charge until launch · Full refund if we don&apos;t ship by December 31, 2025
+                Secure payments via Stripe · No charge until launch · Full refund if we don&apos;t ship
               </p>
             </div>
           </div>

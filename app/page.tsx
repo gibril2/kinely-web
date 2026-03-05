@@ -4,6 +4,7 @@ import { Hero } from '@/components/sections/Hero'
 import { Statement } from '@/components/sections/Statement'
 import { Photography } from '@/components/sections/Photography'
 import { HowItWorks } from '@/components/sections/HowItWorks'
+import { DailyEntry } from '@/components/sections/DailyEntry'
 import { Modes } from '@/components/sections/Modes'
 import { PhotographyBreak } from '@/components/sections/PhotographyBreak'
 import { Archive } from '@/components/sections/Archive'
@@ -20,6 +21,7 @@ export default function HomePage() {
         <Statement />
         <Photography />
         <HowItWorks />
+        <DailyEntry />
         <Modes />
         <PhotographyBreak />
         <Archive />

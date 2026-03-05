@@ -1,5 +1,6 @@
-import Image from 'next/image'
 import Link from 'next/link'
+import Image from 'next/image'
+import { KinelyPhoneMockup } from '../ui/KinelyPhoneMockup'
 
 export function Hero() {
   return (
@@ -58,15 +59,17 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Right: provided family photo — full bleed */}
-      <div className="relative order-first md:order-last min-h-[300px]">
+      {/* Right: warm family photo — notification already embedded in image */}
+      <div
+        className="relative order-first md:order-last"
+        style={{ minHeight: 500, overflow: 'hidden' }}
+      >
         <Image
-          src="/images/hero-family.png"
-          alt="A mother and daughter looking at a phone together — Daddy responded to today's question"
+          src="/images/hero-family-v2.png"
+          alt="Mother and daughter using Kinely together"
           fill
-          className="object-cover object-center"
+          style={{ objectFit: 'cover', objectPosition: 'center top' }}
           priority
-          sizes="(max-width: 768px) 100vw, 50vw"
         />
       </div>
     </section>

@@ -281,7 +281,10 @@ export function KinelyPhoneMockup() {
                   >
                     Dad · Chicago ✈
                   </div>
-                  <VoiceWaveform />
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <VoiceWaveform />
+                    <span style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 9, color: '#7A6E5E', flexShrink: 0 }}>0:43</span>
+                  </div>
                 </div>
               </div>
 
@@ -315,9 +318,15 @@ export function KinelyPhoneMockup() {
                       fontSize: 10,
                       color: '#4A3F2F',
                       lineHeight: 1.4,
+                      marginBottom: 6,
                     }}
                   >
                     SpongeBob theme, we&apos;re chaos 😅
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                    <div style={{ width: 32, height: 24, borderRadius: 4, background: 'rgba(196,150,42,0.2)' }} />
+                    <div style={{ width: 32, height: 24, borderRadius: 4, background: 'rgba(196,84,26,0.15)' }} />
+                    <span style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 8, color: '#7A6E5E', marginLeft: 2 }}>📷 2</span>
                   </div>
                 </div>
               </div>

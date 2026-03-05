@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-const steps = [
+const steps: { num: string; title: string; body: string; spec?: string }[] = [
   {
     num: '01',
     title: 'A question arrives',
@@ -9,7 +9,8 @@ const steps = [
   {
     num: '02',
     title: 'Everyone answers',
-    body: 'Text, voice note, or photo — answering takes under two minutes. Whether you\'re at the dinner table in Gathered Mode or your dad is answering from a business trip in Connected Mode, every voice lands in the same place.',
+    body: 'The question creates a daily entry card — a permanent record anchored to that date. Every family member opens it and responds with text, a voice note, or photos — any combination, in any order. Responses appear as others answer, in real time.',
+    spec: '📝 Text  ·  🎤 60s voice note  ·  📷 3 photos — per person, per day',
   },
   {
     num: '03',
@@ -36,7 +37,7 @@ export function HowItWorks() {
           className="grid md:grid-cols-3 rounded-[20px] overflow-hidden"
           style={{ border: '1px solid rgba(255,255,255,0.1)' }}
         >
-          {steps.map(({ num, title, body }, i) => (
+          {steps.map(({ num, title, body, spec }, i) => (
             <div
               key={num}
               style={{
@@ -53,6 +54,11 @@ export function HowItWorks() {
               <p className="font-dm-sans font-light" style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', lineHeight: 1.8 }}>
                 {body}
               </p>
+              {spec && (
+                <p className="font-dm-sans mt-4" style={{ fontSize: 11, color: 'rgba(255,255,255,0.35)', letterSpacing: '0.02em' }}>
+                  {spec}
+                </p>
+              )}
             </div>
           ))}
         </div>

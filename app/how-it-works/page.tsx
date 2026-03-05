@@ -39,6 +39,7 @@ const faqs = [
   { q: 'What types of questions does Kinely ask?', a: 'We have 1,000+ questions across categories: childhood memories, values and beliefs, funny and hypothetical, milestone reflections, current events in your family, and seasonal prompts. We never ask anything inappropriate. Every question is thoughtful and family-safe.' },
   { q: 'What if my family is spread across different time zones?', a: 'Connected Mode is built for exactly this. Everyone receives the question simultaneously in their local time, and answers arrive in real-time regardless of where in the world your family is.' },
   { q: 'Can I see past answers from before I joined?', a: 'Your archive begins the day you join. There are no answers before that — but many families find that Kinely prompts them to capture and add old family stories and memories manually.' },
+  { q: 'Can someone join without a Kinely account?', a: "Yes — that's Guest Mode. Send any guest a temporary link. They answer the day's question, their response is saved in your archive marked with their name and the date, and they can try Kinely firsthand before ever subscribing." },
 ]
 
 export default function HowItWorksPage() {
@@ -84,6 +85,35 @@ export default function HowItWorksPage() {
                 </div>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* Modes overview */}
+        <section style={{ background: '#EDE6D6', padding: '100px 56px' }}>
+          <div className="max-w-content mx-auto">
+            <div className="flex items-center gap-3 mb-10 text-ember">
+              <div className="w-[18px] h-px bg-ember" />
+              <span className="font-dm-sans font-medium text-[11px] uppercase tracking-[0.1em]">Six ways to connect</span>
+            </div>
+            <h2 className="font-cormorant font-normal text-charcoal mb-12" style={{ fontSize: 'clamp(32px, 3.5vw, 48px)', lineHeight: 1.1, maxWidth: 520 }}>
+              Kinely adapts to every moment your family has.
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {[
+                { name: 'Gathered Mode', desc: 'One screen, everyone in the room. Perfect for dinner together.', chip: 'At the table' },
+                { name: 'Connected Mode', desc: 'Simultaneous push to every phone. Your family answers from anywhere in the world.', chip: 'Miles apart' },
+                { name: 'Spotlight Mode', desc: "It's someone's birthday or milestone. Today, every question is about them.", chip: 'Special days' },
+                { name: 'Grandparents Mode', desc: 'Extra-large text, voice-first answers. Built so no one gets left out.', chip: 'Every generation' },
+                { name: 'Big Events', desc: 'Curated question sets for holidays, first days, graduations, and seasonal milestones.', chip: 'Milestone moments' },
+                { name: 'Guest Mode', desc: 'Send a guest link to anyone joining you. They answer tonight\'s question with your family — no account needed. Their response is saved in your archive, marked with their name and the date.', chip: 'Guests & gatherings' },
+              ].map(({ name, desc, chip }) => (
+                <div key={name} style={{ background: '#F7F2EA', borderRadius: 20, padding: '32px 28px', boxShadow: '0 2px 16px rgba(44,36,22,0.05)' }}>
+                  <h3 className="font-cormorant font-medium text-charcoal mb-2" style={{ fontSize: 22 }}>{name}</h3>
+                  <p className="font-dm-sans font-light text-charcoal-lt mb-5" style={{ fontSize: 13, lineHeight: 1.7 }}>{desc}</p>
+                  <span className="inline-block font-dm-sans font-medium text-ember text-[11px] uppercase tracking-[0.06em] px-3 py-1.5 rounded-chip" style={{ background: '#F5E6DC' }}>{chip}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 

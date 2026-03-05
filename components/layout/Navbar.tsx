@@ -16,6 +16,7 @@ export function Navbar() {
   }, [])
 
   const links = [
+    { label: 'Features', href: '/#modes' },
     { label: 'How it works', href: '/how-it-works' },
     { label: 'The Book', href: '/the-book' },
     { label: 'Pricing', href: '/pricing' },
@@ -30,9 +31,15 @@ export function Navbar() {
       >
         <Link href="/" aria-label="Kinely home"><KinelyLogo size="md" /></Link>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-1">
           {links.map(({ label, href }) => (
-            <Link key={label} href={href} className="font-dm-sans text-[13px] text-charcoal-lt hover:text-charcoal transition-colors">{label}</Link>
+            <Link
+              key={label}
+              href={href}
+              className="font-dm-sans text-[13px] text-charcoal-lt hover:text-charcoal transition-all duration-150 px-3 py-1.5 rounded-full hover:bg-[rgba(44,36,22,0.05)] active:bg-[rgba(44,36,22,0.10)] active:scale-[0.96] active:shadow-[inset_0_1px_3px_rgba(44,36,22,0.12)]"
+            >
+              {label}
+            </Link>
           ))}
         </div>
 

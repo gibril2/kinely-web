@@ -33,9 +33,6 @@ export function Footer() {
           <p className="font-dm-sans font-light text-[12px] text-white/[0.18]">
             © 2025 Kinely Inc. · Built for families, by people who love theirs.
           </p>
-          <p className="font-dm-sans font-light text-[11px] text-white/[0.12]">
-            Photography: Unsplash
-          </p>
         </div>
       </div>
     </footer>

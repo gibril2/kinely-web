@@ -1,8 +1,9 @@
 import Link from 'next/link'
+import { BookClickable } from '../ui/BookClickable'
 
 const specs = [
   { label: 'Cover', value: 'Hardcover, full-bleed family photo, gold foil name + year' },
-  { label: 'Content', value: 'Every question + every answer, in full' },
+  { label: 'Content', value: 'Best 100–200 prompts from your year — curated by Kinely, with every answer in full' },
   { label: 'Pages', value: '120–200 depending on family engagement' },
   { label: 'Delivery', value: 'January of the following year' },
   { label: 'Price', value: '$49 standard · $69 premium hardcover' },
@@ -43,47 +44,14 @@ export function AnnualBook() {
         </Link>
       </div>
 
-      {/* Right: warm CSS treatment instead of broken external image */}
+      {/* Right: book cover photo */}
       <div
-        className="relative flex flex-col items-center justify-center px-16 py-20 min-h-[400px]"
+        className="relative flex items-center justify-center min-h-[400px]"
         style={{
-          background: '#2C2416',
-          backgroundImage: `radial-gradient(ellipse 70% 50% at 50% 40%, rgba(196,84,26,0.12) 0%, transparent 70%)`,
+          background: '#F0E8D8',
         }}
       >
-        {/* Book illustration (CSS) */}
-        <div className="relative mb-10">
-          <div
-            className="rounded-[6px]"
-            style={{
-              width: 180,
-              height: 240,
-              background: 'linear-gradient(135deg, #C4962A 0%, #E8B84B 40%, #C4962A 100%)',
-              boxShadow: '8px 8px 32px rgba(0,0,0,0.4), -2px 0 0 rgba(0,0,0,0.2)',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: 8,
-              padding: 24,
-              position: 'relative',
-            }}
-          >
-            {/* Spine shadow */}
-            <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 12, background: 'rgba(0,0,0,0.2)', borderRadius: '6px 0 0 6px' }} />
-            <div className="font-cormorant italic text-center" style={{ fontSize: 13, color: 'rgba(44,36,22,0.7)', lineHeight: 1.3 }}>The Johnson Family</div>
-            <div style={{ width: 40, height: 1, background: 'rgba(44,36,22,0.3)' }} />
-            <div className="font-cormorant font-medium text-center" style={{ fontSize: 28, color: 'rgba(44,36,22,0.8)', lineHeight: 1 }}>2025</div>
-            <div style={{ width: 40, height: 1, background: 'rgba(44,36,22,0.3)' }} />
-            <div className="font-dm-sans text-center" style={{ fontSize: 9, color: 'rgba(44,36,22,0.5)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Our Year in Full</div>
-          </div>
-          {/* Shadow */}
-          <div style={{ position: 'absolute', bottom: -8, left: '50%', transform: 'translateX(-50%)', width: 160, height: 16, background: 'rgba(0,0,0,0.3)', borderRadius: '50%', filter: 'blur(8px)' }} />
-        </div>
-
-        <p className="font-dm-sans font-light text-center" style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', maxWidth: 240, lineHeight: 1.6 }}>
-          &ldquo;Your 2025 family book is 47% complete.&rdquo;
-        </p>
+        <BookClickable />
       </div>
     </section>
   )

@@ -62,11 +62,11 @@ export function Archive() {
                 paddingLeft: 12,
               }}
             >
-              We forget who we were.
+              Most of what makes your family
               <br />
-              Kinely makes sure your
+              who it is will disappear.
               <br />
-              family never does.
+              Kinely is how you save it.
             </blockquote>
           </div>
 

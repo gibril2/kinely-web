@@ -41,7 +41,7 @@ const tiers: Tier[] = [
       '365 daily questions',
       'Unlimited archive',
       'Voice answers',
-      'Gathered & Connected Mode',
+      'All 5 family modes',
       'Annual Book preview',
       'Founding family badge',
     ],

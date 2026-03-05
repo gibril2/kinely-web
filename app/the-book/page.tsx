@@ -1,6 +1,10 @@
+'use client'
+
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import Link from 'next/link'
+import Image from 'next/image'
+import { motion } from 'framer-motion'
 
 export default function TheBookPage() {
   return (
@@ -10,7 +14,11 @@ export default function TheBookPage() {
         {/* Hero */}
         <section style={{ background: '#EDE6D6', padding: '120px 56px 80px', borderBottom: '1px solid rgba(44,36,22,0.07)' }}>
           <div className="max-w-content mx-auto grid md:grid-cols-2 items-center" style={{ gap: 80 }}>
-            <div>
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, ease: 'easeOut', delay: 0.3 }}
+            >
               <div className="flex items-center gap-3 mb-8 text-ember">
                 <div className="w-[18px] h-px bg-ember" />
                 <span className="font-dm-sans font-medium text-[11px] uppercase tracking-[0.1em]">The Annual Book</span>
@@ -24,27 +32,35 @@ export default function TheBookPage() {
               <Link href="/pricing" className="inline-flex font-dm-sans font-medium text-[14px] text-warm-white bg-ember hover:bg-ember-light rounded-pill px-8 py-3.5 transition-all duration-200">
                 Get a book with your founding membership →
               </Link>
-            </div>
+            </motion.div>
 
-            {/* Book illustration */}
-            <div className="flex items-center justify-center py-8">
-              <div className="relative">
-                <div className="rounded-[8px]" style={{ width: 220, height: 290, background: 'linear-gradient(135deg, #C4962A 0%, #E8B84B 40%, #C4962A 100%)', boxShadow: '12px 12px 48px rgba(44,36,22,0.3), -4px 0 0 rgba(44,36,22,0.15)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 10, padding: 28, position: 'relative' }}>
-                  <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: 16, background: 'rgba(0,0,0,0.15)', borderRadius: '8px 0 0 8px' }} />
-                  <div className="font-cormorant italic text-center" style={{ fontSize: 15, color: 'rgba(44,36,22,0.65)', lineHeight: 1.4 }}>The Johnson Family</div>
-                  <div style={{ width: 48, height: 1, background: 'rgba(44,36,22,0.25)' }} />
-                  <div className="font-cormorant font-medium text-center" style={{ fontSize: 36, color: 'rgba(44,36,22,0.75)', lineHeight: 1 }}>2025</div>
-                  <div style={{ width: 48, height: 1, background: 'rgba(44,36,22,0.25)' }} />
-                  <div className="font-dm-sans text-center" style={{ fontSize: 10, color: 'rgba(44,36,22,0.45)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Our Year in Full</div>
-                </div>
-                <div style={{ position: 'absolute', bottom: -12, left: '50%', transform: 'translateX(-50%)', width: 190, height: 20, background: 'rgba(44,36,22,0.15)', borderRadius: '50%', filter: 'blur(10px)' }} />
-              </div>
+            {/* Book cover photo */}
+            <div className="flex items-center justify-center py-4">
+              <motion.div
+                initial={{ scale: 1.06, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
+              >
+                <Image
+                  src="/images/book-cover.png"
+                  alt="Kinely Annual Book — hardcover family book"
+                  width={560}
+                  height={440}
+                  style={{ objectFit: 'contain', maxHeight: 480, width: 'auto', filter: 'drop-shadow(0 12px 40px rgba(44,36,22,0.15))' }}
+                  priority
+                />
+              </motion.div>
             </div>
           </div>
         </section>
 
         {/* What's in the book */}
-        <section style={{ background: '#F7F2EA', padding: '100px 56px' }}>
+        <motion.section
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: 'easeOut', delay: 0.4 }}
+          style={{ background: '#F7F2EA', padding: '100px 56px' }}
+        >
           <div className="max-w-content mx-auto">
             <div className="flex items-center gap-3 mb-12 text-ember">
               <div className="w-[18px] h-px bg-ember" />
@@ -52,7 +68,7 @@ export default function TheBookPage() {
             </div>
             <div className="grid md:grid-cols-3 gap-8">
               {[
-                { title: 'Every question', body: 'All 365 questions from your year, printed in full — seasonal prompts, milestone questions, and the funny ones your kids submitted.' },
+                { title: 'The best questions', body: 'The best 100–200 prompts from your year — curated by Kinely to capture the moments that mattered most. Seasonal, milestone, and the ones that surprised you.' },
                 { title: 'Every answer', body: 'Every family member\'s answer, in their own words, attributed by name and age at time of writing. Voice answers are transcribed verbatim.' },
                 { title: 'Your family at this moment', body: 'A family portrait section at the front — ages, names, and a family summary page automatically generated from your year of answers.' },
               ].map(({ title, body }) => (
@@ -63,10 +79,40 @@ export default function TheBookPage() {
               ))}
             </div>
           </div>
-        </section>
+        </motion.section>
+
+        {/* Inside the book — spreads */}
+        <motion.section
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: 'easeOut', delay: 0.5 }}
+          style={{ background: '#EDE6D6', padding: '80px 56px' }}
+        >
+          <div className="max-w-content mx-auto">
+            <div className="flex items-center gap-3 mb-10 text-ember">
+              <div className="w-[18px] h-px bg-ember" />
+              <span className="font-dm-sans font-medium text-[11px] uppercase tracking-[0.1em]">Inside the book</span>
+            </div>
+            <div className="flex flex-col gap-8">
+              <Image
+                src="/images/book-spread-1.png"
+                alt="Kinely Annual Book open spread — daily question with family answers"
+                width={1200}
+                height={800}
+                className="w-full"
+                style={{ objectFit: 'contain', filter: 'drop-shadow(0 8px 32px rgba(44,36,22,0.12))' }}
+              />
+            </div>
+          </div>
+        </motion.section>
 
         {/* Book specs */}
-        <section style={{ background: '#2C2416', padding: '80px 56px' }}>
+        <motion.section
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: 'easeOut', delay: 0.6 }}
+          style={{ background: '#2C2416', padding: '80px 56px' }}
+        >
           <div className="max-w-[800px] mx-auto">
             <div className="flex items-center gap-3 mb-12 text-ember-light">
               <div className="w-[18px] h-px bg-ember-light" />
@@ -90,16 +136,22 @@ export default function TheBookPage() {
               ))}
             </div>
           </div>
-        </section>
+        </motion.section>
 
         {/* CTA */}
-        <section className="text-center" style={{ background: '#F7F2EA', padding: '80px 56px' }}>
+        <motion.section
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: 'easeOut', delay: 0.7 }}
+          className="text-center"
+          style={{ background: '#F7F2EA', padding: '80px 56px' }}
+        >
           <h2 className="font-cormorant font-normal text-charcoal mb-4" style={{ fontSize: 44 }}>Get the book with your membership.</h2>
           <p className="font-dm-sans font-light text-charcoal-lt mb-8" style={{ fontSize: 16, maxWidth: 440, margin: '0 auto 32px' }}>The Family + Book tier includes your first Annual Book. The Founding Circle includes two.</p>
           <Link href="/pricing" className="inline-flex font-dm-sans font-medium text-[14px] text-warm-white bg-ember hover:bg-ember-light rounded-pill px-8 py-3.5 transition-all duration-200">
             See pricing →
           </Link>
-        </section>
+        </motion.section>
       </main>
       <Footer />
     </>

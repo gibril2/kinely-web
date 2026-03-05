@@ -13,7 +13,7 @@ export function Closing() {
       }}
     >
       <div className="max-w-[640px] mx-auto">
-        <p className="font-dm-sans font-light uppercase tracking-[0.08em] mb-8" style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)' }}>
+        <p className="font-dm-sans font-medium uppercase tracking-[0.12em] mb-8" style={{ fontSize: 11, color: 'rgba(255,255,255,0.6)', letterSpacing: '0.12em' }}>
           Your family&apos;s story is happening right now
         </p>
 
@@ -33,6 +33,9 @@ export function Closing() {
           >
             Start your family&apos;s story →
           </Link>
+          <p className="font-dm-sans font-light" style={{ fontSize: 12, color: 'rgba(255,255,255,0.3)' }}>
+            Founding family pricing from $30 · Limited spots available
+          </p>
 
           <div className="w-full max-w-[400px]">
             <p className="font-dm-sans font-light text-center mb-3" style={{ fontSize: 12, color: 'rgba(255,255,255,0.25)' }}>
