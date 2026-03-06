@@ -23,6 +23,123 @@ export default function AboutPage() {
           </div>
         </section>
 
+        {/* Word origin */}
+        <section style={{ background: '#2C2416' }}>
+          <div className="max-w-content mx-auto" style={{ padding: '100px 56px' }}>
+
+            {/* Kicker */}
+            <div className="flex items-center gap-3 mb-16" style={{ color: 'rgba(253,250,245,0.3)' }}>
+              <div className="w-[18px] h-px" style={{ background: 'rgba(253,250,245,0.2)' }} />
+              <span className="font-dm-sans font-medium text-[11px] uppercase tracking-[0.1em]">The name</span>
+            </div>
+
+            {/* KINELY — large centered header */}
+            <div className="text-center mb-6">
+              <h2
+                className="font-cormorant font-normal"
+                style={{ fontSize: 'clamp(80px, 13vw, 180px)', color: '#FDFAF5', lineHeight: 0.9, letterSpacing: '-0.02em' }}
+              >
+                Kinely
+              </h2>
+            </div>
+
+            {/* Phonetic + tagline */}
+            <div className="flex flex-col items-center gap-3 mb-20">
+              <span className="font-dm-sans font-light" style={{ fontSize: 12, color: 'rgba(253,250,245,0.2)', letterSpacing: '0.14em' }}>
+                / ˈkɪn · li /
+              </span>
+              <span className="font-cormorant italic" style={{ fontSize: 22, color: 'rgba(253,250,245,0.35)' }}>
+                In the manner of kin.
+              </span>
+            </div>
+
+            {/* Divider with ember center mark */}
+            <div className="relative flex items-center mb-20">
+              <div className="flex-1" style={{ height: 1, background: 'rgba(253,250,245,0.07)' }} />
+              <div className="mx-6 rounded-full flex-shrink-0" style={{ width: 8, height: 8, background: '#C4541A' }} />
+              <div className="flex-1" style={{ height: 1, background: 'rgba(253,250,245,0.07)' }} />
+            </div>
+
+            {/* KIN + FAMILY — two panels */}
+            <div className="grid md:grid-cols-2" style={{ gap: 2 }}>
+
+              {/* KIN panel */}
+              <div
+                className="rounded-l-card"
+                style={{ background: 'rgba(253,250,245,0.04)', border: '1px solid rgba(253,250,245,0.07)', borderRight: 'none', padding: '56px 52px' }}
+              >
+                {/* Label */}
+                <div className="font-dm-sans font-medium uppercase tracking-widest mb-8" style={{ fontSize: 9, color: '#C4541A', letterSpacing: '0.2em' }}>
+                  Kin
+                </div>
+
+                {/* Big word */}
+                <div
+                  className="font-cormorant font-normal mb-2"
+                  style={{ fontSize: 'clamp(56px, 7vw, 96px)', color: '#FDFAF5', lineHeight: 0.9, letterSpacing: '-0.02em' }}
+                >
+                  Next
+                </div>
+                <div
+                  className="font-cormorant font-normal italic mb-10"
+                  style={{ fontSize: 'clamp(56px, 7vw, 96px)', color: 'rgba(253,250,245,0.25)', lineHeight: 0.9, letterSpacing: '-0.02em' }}
+                >
+                  of kin.
+                </div>
+
+                {/* Rule */}
+                <div style={{ width: 32, height: 1, background: 'rgba(253,250,245,0.2)', marginBottom: 28 }} />
+
+                {/* Definition */}
+                <p className="font-dm-sans font-light mb-4" style={{ fontSize: 14, color: 'rgba(253,250,245,0.5)', lineHeight: 1.8 }}>
+                  The person listed on the form. The one called when it matters. The relationship the world recognises as closest — before sentiment, before preference. By blood or bond.
+                </p>
+                <p className="font-cormorant italic" style={{ fontSize: 18, color: 'rgba(253,250,245,0.3)', lineHeight: 1.5 }}>
+                  Your people, officially.
+                </p>
+              </div>
+
+              {/* FAMILY panel */}
+              <div
+                className="rounded-r-card"
+                style={{ background: 'rgba(196,84,26,0.08)', border: '1px solid rgba(196,84,26,0.2)', padding: '56px 52px' }}
+              >
+                {/* Label */}
+                <div className="font-dm-sans font-medium uppercase tracking-widest mb-8" style={{ fontSize: 9, color: '#C4962A', letterSpacing: '0.2em' }}>
+                  Family
+                </div>
+
+                {/* Big word */}
+                <div
+                  className="font-cormorant font-normal mb-2"
+                  style={{ fontSize: 'clamp(56px, 7vw, 96px)', color: '#FDFAF5', lineHeight: 0.9, letterSpacing: '-0.02em' }}
+                >
+                  Together
+                </div>
+                <div
+                  className="font-cormorant font-normal italic mb-10"
+                  style={{ fontSize: 'clamp(56px, 7vw, 96px)', color: 'rgba(196,84,26,0.5)', lineHeight: 0.9, letterSpacing: '-0.02em' }}
+                >
+                  every day.
+                </div>
+
+                {/* Rule */}
+                <div style={{ width: 32, height: 1, background: 'rgba(196,150,42,0.4)', marginBottom: 28 }} />
+
+                {/* Definition */}
+                <p className="font-dm-sans font-light mb-4" style={{ fontSize: 14, color: 'rgba(253,250,245,0.5)', lineHeight: 1.8 }}>
+                  The table. The voices. The version of your daughter that exists right now, at this exact age, saying exactly these things. Family is not a static fact — it is something you build daily, in small answers to small questions.
+                </p>
+                <p className="font-cormorant italic" style={{ fontSize: 18, color: 'rgba(196,150,42,0.5)', lineHeight: 1.5 }}>
+                  Your people, in practice.
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+        </section>
+
         {/* Story */}
         <section style={{ background: '#F7F2EA', padding: '80px 56px 100px' }}>
           <div className="max-w-[720px] mx-auto">
