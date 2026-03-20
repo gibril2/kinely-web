@@ -1,24 +1,22 @@
 'use client'
 
-import { useState, useRef } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRef, useState } from 'react'
 import Image from 'next/image'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
+import { useBookTransition } from '@/lib/book-transition'
 
 export function BookClickable() {
-  const router = useRouter()
   const ref = useRef<HTMLDivElement>(null)
-  const [expanding, setExpanding] = useState(false)
-  const [bookRect, setBookRect] = useState<DOMRect | null>(null)
   const [tilt, setTilt] = useState({ x: 0, y: 0 })
   const [hovered, setHovered] = useState(false)
+  const { startTransition } = useBookTransition()
 
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
     if (!ref.current) return
     const rect = ref.current.getBoundingClientRect()
-    const nx = (e.clientX - rect.left) / rect.width - 0.5   // -0.5 to 0.5
+    const nx = (e.clientX - rect.left) / rect.width - 0.5
     const ny = (e.clientY - rect.top) / rect.height - 0.5
-    setTilt({ x: nx * 20, y: -ny * 20 })  // ±10° max
+    setTilt({ x: nx * 20, y: -ny * 20 })
   }
 
   function handleMouseLeave() {
@@ -27,34 +25,26 @@ export function BookClickable() {
   }
 
   function handleClick() {
-    if (!ref.current || expanding) return
-    const rect = ref.current.getBoundingClientRect()
-    setBookRect(rect)
-    setExpanding(true)
+    if (!ref.current) return
+    startTransition(ref.current.getBoundingClientRect())
   }
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-      {/* Book with 3D tilt */}
       <motion.div
         ref={ref}
         onClick={handleClick}
         onMouseMove={handleMouseMove}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={handleMouseLeave}
-        style={{
-          perspective: 1000,
-          width: '100%',
-          height: '100%',
-          cursor: 'pointer',
-          position: 'relative',
-        }}
+        style={{ perspective: 1000, width: '100%', height: '100%', cursor: 'pointer', position: 'relative' }}
         animate={{ rotateX: tilt.y, rotateY: tilt.x, scale: hovered ? 1.02 : 1 }}
         transition={{ type: 'spring', stiffness: 280, damping: 28 }}
+        whileTap={{ scale: 0.97 }}
       >
         <Image
-          src="/images/book-cover.png"
-          alt="Kinely Annual Book — hardcover family book"
+          src="/images/book-open.png"
+          alt="Kinely Annual Book — open book spread"
           width={640}
           height={480}
           className="w-full h-full object-contain"
@@ -63,18 +53,10 @@ export function BookClickable() {
           draggable={false}
         />
 
-        {/* Hover label */}
         <motion.div
           animate={{ opacity: hovered ? 1 : 0 }}
           transition={{ duration: 0.2 }}
-          style={{
-            position: 'absolute',
-            bottom: 24,
-            left: 0,
-            right: 0,
-            textAlign: 'center',
-            pointerEvents: 'none',
-          }}
+          style={{ position: 'absolute', bottom: 24, left: 0, right: 0, textAlign: 'center', pointerEvents: 'none' }}
         >
           <span
             className="font-dm-sans font-medium"
@@ -92,43 +74,6 @@ export function BookClickable() {
           </span>
         </motion.div>
       </motion.div>
-
-      {/* Expand overlay */}
-      <AnimatePresence>
-        {expanding && bookRect && (
-          <motion.div
-            initial={{
-              top: bookRect.top,
-              left: bookRect.left,
-              width: bookRect.width,
-              height: bookRect.height,
-              borderRadius: 16,
-            }}
-            animate={{
-              top: 0,
-              left: 0,
-              width: '100vw',
-              height: '100vh',
-              borderRadius: 0,
-            }}
-            style={{
-              position: 'fixed',
-              zIndex: 9999,
-              overflow: 'hidden',
-            }}
-            transition={{ duration: 0.48, ease: [0.32, 0.72, 0, 1] }}
-            onAnimationComplete={() => router.push('/the-book')}
-          >
-            <Image
-              src="/images/book-cover.png"
-              fill
-              style={{ objectFit: 'cover', objectPosition: 'center top' }}
-              alt=""
-              priority
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   )
 }

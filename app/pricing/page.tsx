@@ -6,7 +6,7 @@ const tiers = [
   {
     id: 'tier1',
     envKey: 'NEXT_PUBLIC_STRIPE_TIER1_LINK',
-    name: 'Founding Family',
+    name: 'Spark',
     price: '$30',
     billing: 'One full year',
     was: 'Regular price $96/yr',
@@ -20,7 +20,7 @@ const tiers = [
       'Founding family badge in the app',
       'Help shape the product from day one',
     ],
-    cta: 'Join as a Founding Family',
+    cta: 'Become a founding family →',
     bg: '#F7F2EA',
     border: '1px solid rgba(44,36,22,0.1)',
     dark: false,
@@ -28,20 +28,19 @@ const tiers = [
   {
     id: 'tier2',
     envKey: 'NEXT_PUBLIC_STRIPE_TIER2_LINK',
-    name: 'Family + Book',
+    name: 'Flame',
     price: '$65',
     billing: 'Includes your Annual Book',
     was: 'Regular price $165',
-    desc: 'Your first year of Kinely plus one hardcover Annual Book, delivered in January.',
+    desc: 'Your full year of Kinely plus one hardcover Annual Book — your family\'s story, printed and delivered to your door in January.',
     features: [
-      'Everything in Founding Family',
-      'One hardcover Annual Book (valued at $49)',
-      'Premium cover with gold foil name + year',
-      'Direct feedback line to the founders',
+      'Everything in Spark',
+      'One hardcover Annual Book',
+      'Premium cover with gold foil',
       'Early access to every new feature',
-      "Your family's name in the app as a founding family",
+      "Your family named in the app at launch",
     ],
-    cta: 'Get the Family + Book',
+    cta: 'Become a founding family →',
     bg: '#2C2416',
     border: 'none',
     dark: true,
@@ -50,21 +49,20 @@ const tiers = [
   {
     id: 'tier3',
     envKey: 'NEXT_PUBLIC_STRIPE_TIER3_LINK',
-    name: 'Founding Circle',
+    name: 'Ember',
     price: '$150',
     billing: 'Lifetime benefits',
     was: 'Limited to 100 families',
-    desc: "For families who believe in what we're building and want to be part of it permanently.",
+    desc: "For families who don't just want to use Kinely — they want to help build it. Same book, different relationship.",
     features: [
-      'Everything in Family + Book',
-      'Two hardcover Annual Books per year',
-      'Lifetime 50% off all plans',
-      'Your name on the Kinely Founding Wall',
+      'Everything in Flame',
+      'Lifetime 50% off all future plans',
+      'Your name on the Kinely Founding Wall — permanently',
       'Shape the question library directly',
       'Private founder community access',
-      'Annual video call with the founders',
+      'Annual call with the founders',
     ],
-    cta: 'Join the Founding Circle',
+    cta: 'Become a founding family →',
     bg: '#F5E6DC',
     border: '1px solid rgba(196,84,26,0.15)',
     dark: false,
@@ -102,7 +100,7 @@ export default function PricingPage() {
               <span className="font-dm-sans font-medium text-[11px] uppercase tracking-[0.1em]">Founding family pricing</span>
             </div>
             <h1 className="font-cormorant font-normal text-charcoal mb-5" style={{ fontSize: 'clamp(40px, 5vw, 64px)', lineHeight: 1.05, maxWidth: 560 }}>
-              Back Kinely.<br /><em className="italic text-ember">Own your story.</em>
+              Become a{' '}<em className="italic text-ember">Founding Family.</em>
             </h1>
             <p className="font-dm-sans font-light text-charcoal-lt" style={{ fontSize: 17, lineHeight: 1.7, maxWidth: 520 }}>
               We&apos;re offering our founding families a deeply discounted first year. In exchange, you help shape the product your family — and millions of families like yours — will use for decades.

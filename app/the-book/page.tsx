@@ -5,8 +5,24 @@ import { Footer } from '@/components/layout/Footer'
 import Link from 'next/link'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { useSearchParams } from 'next/navigation'
+import { Suspense } from 'react'
 
-export default function TheBookPage() {
+function TheBookContent() {
+  const searchParams = useSearchParams()
+  const fromTransition = searchParams.get('t') === '1'
+
+  // When arriving via book transition the overlay covers the page,
+  // so we skip entrance animations and render everything at final state.
+  const fade = (delay: number) =>
+    fromTransition
+      ? { initial: false as const, animate: {}, transition: {} }
+      : {
+          initial: { opacity: 0, y: 16 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.5, ease: 'easeOut', delay },
+        }
+
   return (
     <>
       <Navbar />
@@ -14,11 +30,7 @@ export default function TheBookPage() {
         {/* Hero */}
         <section style={{ background: '#EDE6D6', padding: '120px 56px 80px', borderBottom: '1px solid rgba(44,36,22,0.07)' }}>
           <div className="max-w-content mx-auto grid md:grid-cols-2 items-center" style={{ gap: 80 }}>
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: 'easeOut', delay: 0.3 }}
-            >
+            <motion.div {...fade(0.3)}>
               <div className="flex items-center gap-3 mb-8 text-ember">
                 <div className="w-[18px] h-px bg-ember" />
                 <span className="font-dm-sans font-medium text-[11px] uppercase tracking-[0.1em]">The Annual Book</span>
@@ -34,16 +46,12 @@ export default function TheBookPage() {
               </Link>
             </motion.div>
 
-            {/* Book cover photo */}
+            {/* Book photo */}
             <div className="flex items-center justify-center py-4">
-              <motion.div
-                initial={{ scale: 1.06, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
-              >
+              <motion.div {...fade(0.2)}>
                 <Image
-                  src="/images/book-cover.png"
-                  alt="Kinely Annual Book — hardcover family book"
+                  src="/images/book-open.png"
+                  alt="Kinely Annual Book — open book spread"
                   width={560}
                   height={440}
                   style={{ objectFit: 'contain', maxHeight: 480, width: 'auto', filter: 'drop-shadow(0 12px 40px rgba(44,36,22,0.15))' }}
@@ -56,9 +64,7 @@ export default function TheBookPage() {
 
         {/* What's in the book */}
         <motion.section
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: 'easeOut', delay: 0.4 }}
+          {...fade(0.4)}
           style={{ background: '#F7F2EA', padding: '100px 56px' }}
         >
           <div className="max-w-content mx-auto">
@@ -83,9 +89,7 @@ export default function TheBookPage() {
 
         {/* Inside the book — spreads */}
         <motion.section
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: 'easeOut', delay: 0.5 }}
+          {...fade(0.5)}
           style={{ background: '#EDE6D6', padding: '80px 56px' }}
         >
           <div className="max-w-content mx-auto">
@@ -108,9 +112,7 @@ export default function TheBookPage() {
 
         {/* Book specs */}
         <motion.section
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: 'easeOut', delay: 0.6 }}
+          {...fade(0.6)}
           style={{ background: '#2C2416', padding: '80px 56px' }}
         >
           <div className="max-w-[800px] mx-auto">
@@ -140,9 +142,7 @@ export default function TheBookPage() {
 
         {/* CTA */}
         <motion.section
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: 'easeOut', delay: 0.7 }}
+          {...fade(0.7)}
           className="text-center"
           style={{ background: '#F7F2EA', padding: '80px 56px' }}
         >
@@ -155,5 +155,13 @@ export default function TheBookPage() {
       </main>
       <Footer />
     </>
+  )
+}
+
+export default function TheBookPage() {
+  return (
+    <Suspense>
+      <TheBookContent />
+    </Suspense>
   )
 }
