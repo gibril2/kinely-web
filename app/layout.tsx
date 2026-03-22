@@ -2,7 +2,9 @@ import type { Metadata } from 'next'
 import { Cormorant_Garamond, DM_Sans } from 'next/font/google'
 import '../styles/globals.css'
 import { ModeTransitionProvider } from '@/lib/mode-transition'
+import { BookTransitionProvider } from '@/lib/book-transition'
 import { ModeTransitionOverlay } from '@/components/ui/ModeTransitionOverlay'
+import { BookTransitionOverlay } from '@/components/ui/BookTransitionOverlay'
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -45,8 +47,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${cormorant.variable} ${dmSans.variable} font-dm-sans`}>
         <ModeTransitionProvider>
-          {children}
-          <ModeTransitionOverlay />
+          <BookTransitionProvider>
+            {children}
+            <ModeTransitionOverlay />
+            <BookTransitionOverlay />
+          </BookTransitionProvider>
         </ModeTransitionProvider>
       </body>
     </html>
