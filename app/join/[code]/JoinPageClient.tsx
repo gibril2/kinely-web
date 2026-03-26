@@ -208,7 +208,7 @@ export function JoinPageClient({
             This invite may have expired or already been used.
           </p>
           <a
-            href="https://getkinely.com"
+            href="https://kinely.app"
             style={{
               color: '#B5622A',
               fontSize: 15,

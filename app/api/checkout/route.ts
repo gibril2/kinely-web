@@ -12,9 +12,16 @@ export async function POST(req: NextRequest) {
     const stripe = getStripe()
     const { priceId, familyId, email } = await req.json()
 
-    if (!priceId || !familyId) {
+    if (!familyId) {
       return NextResponse.json(
-        { error: 'Missing priceId or familyId' },
+        { error: 'Missing familyId' },
+        { status: 400 }
+      )
+    }
+
+    if (!priceId) {
+      return NextResponse.json(
+        { error: 'Subscription plans not configured. Please try again shortly.' },
         { status: 400 }
       )
     }

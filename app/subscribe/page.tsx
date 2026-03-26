@@ -24,6 +24,50 @@ const PRICES = {
   },
 }
 
+function MissingFamilyFallback() {
+  return (
+    <main className="min-h-screen flex flex-col items-center justify-center px-5 py-10 font-dm-sans"
+      style={{ backgroundColor: '#0D0D0D' }}>
+
+      <div className="mb-12 text-center">
+        <h1 className="font-cormorant text-[32px] font-semibold tracking-tight"
+          style={{ color: '#F5F0E8' }}>
+          Kinely
+        </h1>
+        <p className="text-[15px] mt-2" style={{ color: 'rgba(245,240,232,0.4)' }}>
+          Your family story, told together
+        </p>
+      </div>
+
+      <div className="text-center max-w-[360px]">
+        <h2 className="text-[24px] font-semibold mb-3" style={{ color: '#F5F0E8' }}>
+          Start in the app first
+        </h2>
+        <p className="text-[15px] leading-relaxed mb-8" style={{ color: 'rgba(245,240,232,0.5)' }}>
+          Download Kinely and create your family circle, then you&apos;ll be
+          brought here to choose a plan.
+        </p>
+
+        <a
+          href="kinely://subscribe"
+          className="inline-block w-full rounded-[10px] py-3.5 text-[15px] font-semibold text-center transition-opacity"
+          style={{ backgroundColor: '#C4541A', color: '#F5F0E8' }}
+        >
+          Open Kinely app
+        </a>
+
+        <a
+          href="/"
+          className="inline-block mt-4 text-[14px] font-medium"
+          style={{ color: '#C4541A' }}
+        >
+          Learn more
+        </a>
+      </div>
+    </main>
+  )
+}
+
 function SubscribeContent() {
   const searchParams = useSearchParams()
   const familyId = searchParams.get('family_id') ?? ''
@@ -31,6 +75,10 @@ function SubscribeContent() {
 
   const [loading, setLoading] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
+
+  if (!familyId) {
+    return <MissingFamilyFallback />
+  }
 
   const handleCheckout = async (priceKey: keyof typeof PRICES) => {
     const price = PRICES[priceKey]
