@@ -6,19 +6,21 @@ import { useSearchParams } from 'next/navigation'
 const PRICES = {
   founding: {
     id: process.env.NEXT_PUBLIC_PRICE_FOUNDING!,
-    name: 'Founding Family',
-    price: '$59',
-    period: 'year',
-    description: 'Locked in for life at this price',
+    name: 'Annual Plan',
+    displayPrice: '$5',
+    displayPeriod: 'month',
+    billingNote: 'Billed as $59/year',
+    description: 'Your whole circle included. Up to 10 members, all free.',
     highlight: true,
     badge: 'Best Value',
   },
-  annual: {
-    id: process.env.NEXT_PUBLIC_PRICE_ANNUAL!,
-    name: 'Annual',
-    price: '$79',
-    period: 'year',
-    description: 'Full access, billed annually',
+  monthly: {
+    id: process.env.NEXT_PUBLIC_PRICE_MONTHLY!,
+    name: 'Monthly Plan',
+    displayPrice: '$9.99',
+    displayPeriod: 'month',
+    billingNote: 'Billed monthly. Cancel anytime.',
+    description: 'Full access, billed monthly.',
     highlight: false,
     badge: null,
   },
@@ -158,29 +160,27 @@ function SubscribeContent() {
               </div>
             )}
 
-            <div className="flex justify-between items-start mb-2">
-              <div>
-                <div className="text-[17px] font-semibold" style={{ color: '#F5F0E8' }}>
-                  {plan.name}
-                </div>
-                <div className="text-[13px] mt-0.5" style={{ color: 'rgba(245,240,232,0.45)' }}>
-                  {plan.description}
-                </div>
-              </div>
-              <div className="text-right">
-                <span className="text-[28px] font-bold" style={{ color: '#F5F0E8' }}>
-                  {plan.price}
+            <div className="mb-2">
+              <div className="flex items-baseline gap-1">
+                <span className="text-[32px] font-bold" style={{ color: '#F5F0E8' }}>
+                  {plan.displayPrice}
                 </span>
-                <span className="text-[13px]" style={{ color: 'rgba(245,240,232,0.4)' }}>
-                  /{plan.period}
+                <span className="text-[14px] font-light" style={{ color: 'rgba(245,240,232,0.5)' }}>
+                  a {plan.displayPeriod}
                 </span>
               </div>
+              <div className="text-[13px] mt-1" style={{ color: 'rgba(245,240,232,0.35)' }}>
+                {plan.billingNote}
+              </div>
+            </div>
+            <div className="text-[14px] mt-3 mb-4" style={{ color: 'rgba(245,240,232,0.55)', lineHeight: 1.6 }}>
+              {plan.description}
             </div>
 
             <button
               onClick={() => handleCheckout(key as keyof typeof PRICES)}
               disabled={loading !== null}
-              className="w-full rounded-[10px] py-3.5 text-[15px] font-semibold mt-4 transition-opacity"
+              className="w-full rounded-[10px] py-3.5 text-[15px] font-semibold transition-opacity"
               style={{
                 backgroundColor: plan.highlight ? '#C4541A' : 'rgba(255,255,255,0.08)',
                 color: '#F5F0E8',
@@ -189,7 +189,9 @@ function SubscribeContent() {
                 opacity: loading !== null ? 0.6 : 1,
               }}
             >
-              {loading === key ? 'Loading...' : `Get started \u2014 ${plan.price}/${plan.period}`}
+              {loading === key
+                ? 'Loading...'
+                : plan.highlight ? 'Start your family plan' : 'Start monthly plan'}
             </button>
           </div>
         ))}
