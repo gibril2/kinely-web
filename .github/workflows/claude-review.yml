@@ -1,0 +1,31 @@
+name: Claude PR Review
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  claude-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            Review this PR like a pragmatic senior reviewer for a solo founder's marketing site
+            (Next.js 16, deploys to production on merge to master). Focus ONLY on: exposed keys
+            or env vars, broken builds, broken links or payment/Stripe link integrity, and bugs
+            that would break the page for visitors. Skip style and formatting entirely.
+            Post findings as a PR review comment with file:line references.
+            End with a verdict: SHIP / SHIP WITH FIXES / DO NOT SHIP, one sentence why.
+          claude_args: |
+            --max-turns 15
+            --model claude-sonnet-4-6
