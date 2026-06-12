@@ -16,17 +16,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 1
       - uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          track_progress: true
           prompt: |
+            REPO: ${{ github.repository }}
+            PR NUMBER: ${{ github.event.pull_request.number }}
+
             Review this PR like a pragmatic senior reviewer for a solo founder's marketing site
             (Next.js 16, deploys to production on merge to master). Focus ONLY on: exposed keys
             or env vars, broken builds, broken links or payment/Stripe link integrity, and bugs
             that would break the page for visitors. Skip style and formatting entirely.
-            Post findings as a PR review comment with file:line references.
-            End with a verdict: SHIP / SHIP WITH FIXES / DO NOT SHIP, one sentence why.
+            Use inline comments for specific issues; finish with one top-level comment
+            ending in a verdict: SHIP / SHIP WITH FIXES / DO NOT SHIP, one sentence why.
           claude_args: |
+            --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*)"
             --max-turns 50
             --model claude-sonnet-4-6
