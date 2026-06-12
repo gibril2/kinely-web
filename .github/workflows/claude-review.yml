@@ -28,5 +28,5 @@ jobs:
             Post findings as a PR review comment with file:line references.
             End with a verdict: SHIP / SHIP WITH FIXES / DO NOT SHIP, one sentence why.
           claude_args: |
-            --max-turns 15
+            --max-turns 50
             --model claude-sonnet-4-6
