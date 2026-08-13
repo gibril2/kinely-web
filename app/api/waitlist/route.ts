@@ -12,8 +12,8 @@ export async function POST(req: NextRequest) {
     const audienceId = process.env.RESEND_AUDIENCE_ID
 
     if (!apiKey || !audienceId) {
-      // Dev mode: just log
-      console.log('Waitlist signup (no Resend configured):', email)
+      // Dev mode: acknowledge without logging the address (PII).
+      console.log('Waitlist signup received (no Resend configured)')
       return NextResponse.json({ ok: true })
     }
 

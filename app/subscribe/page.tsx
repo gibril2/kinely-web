@@ -1,11 +1,11 @@
 'use client'
 
 import { useState, Suspense } from 'react'
+import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 
 const PRICES = {
   founding: {
-    id: process.env.NEXT_PUBLIC_PRICE_FOUNDING!,
     name: 'Annual Plan',
     displayPrice: '$5',
     displayPeriod: 'month',
@@ -15,7 +15,6 @@ const PRICES = {
     badge: 'Best Value',
   },
   monthly: {
-    id: process.env.NEXT_PUBLIC_PRICE_MONTHLY!,
     name: 'Monthly Plan',
     displayPrice: '$9.99',
     displayPeriod: 'month',
@@ -58,13 +57,13 @@ function MissingFamilyFallback() {
           Open Kinely app
         </a>
 
-        <a
+        <Link
           href="/"
           className="inline-block mt-4 text-[14px] font-medium"
           style={{ color: '#C4541A' }}
         >
           Learn more
-        </a>
+        </Link>
       </div>
     </main>
   )
@@ -83,7 +82,6 @@ function SubscribeContent() {
   }
 
   const handleCheckout = async (priceKey: keyof typeof PRICES) => {
-    const price = PRICES[priceKey]
     setLoading(priceKey)
     setError(null)
 
@@ -92,7 +90,7 @@ function SubscribeContent() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          priceId: price.id,
+          plan: priceKey,
           familyId,
           email,
         }),
@@ -105,7 +103,7 @@ function SubscribeContent() {
         return
       }
 
-      window.location.href = data.url
+      window.location.assign(data.url)
     } catch {
       setError('Something went wrong. Please try again.')
     } finally {

@@ -20,6 +20,9 @@ export function JoinPageClient({
 
   useEffect(() => {
     const ua = navigator.userAgent
+    // Deliberate one-time post-hydration setState: reading navigator during
+    // render would mismatch the server-rendered HTML.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMobile(/iPhone|iPad|iPod|Android/i.test(ua))
   }, [])
 
@@ -195,7 +198,7 @@ export function JoinPageClient({
               textAlign: 'center',
               marginTop: 32,
             }}>
-              Or scan this page's URL with your phone camera
+              Or scan this page&apos;s URL with your phone camera
             </p>
           )}
         </>
