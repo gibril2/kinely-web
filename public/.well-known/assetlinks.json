@@ -1,0 +1,15 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.kinely.app",
+      "sha256_cert_fingerprints": [
+        "DB:DC:B9:43:46:9E:CD:90:90:D1:0F:7C:60:05:C3:73:0C:1E:9D:FA:E6:67:07:8D:95:21:AA:57:D8:5E:27:70"
+      ]
+    }
+  }
+]
