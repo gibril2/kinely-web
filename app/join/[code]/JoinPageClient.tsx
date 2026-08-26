@@ -9,6 +9,11 @@ interface InvitePreview {
   valid: boolean
 }
 
+// The app is Android-only for now. When the iOS app ships, set this to true
+// and replace the placeholder App Store URL below with the real listing.
+const APP_STORE_LIVE = false
+const APP_STORE_URL = 'https://apps.apple.com/app/kinely/id000000000'
+
 export function JoinPageClient({
   code,
   preview,
@@ -17,6 +22,7 @@ export function JoinPageClient({
   preview: InvitePreview | null
 }) {
   const [isMobile, setIsMobile] = useState(false)
+  const [copied, setCopied] = useState(false)
 
   useEffect(() => {
     const ua = navigator.userAgent
@@ -30,6 +36,17 @@ export function JoinPageClient({
   const familyName = preview?.family_name
   const inviterName = preview?.inviter_name
   const deepLink = `kinely://join/${code}`
+
+  const copyCode = async () => {
+    try {
+      await navigator.clipboard.writeText(code)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch {
+      // Clipboard unavailable (older browser / non-secure context) —
+      // the code text below is select-all on tap, so manual copy still works.
+    }
+  }
 
   // On mobile, try to open the app immediately via universal link
   useEffect(() => {
@@ -146,27 +163,29 @@ export function JoinPageClient({
             maxWidth: 320,
             alignItems: 'center',
           }}>
-            <a
-              href="https://apps.apple.com/app/kinely/id000000000"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flex: 1,
-                width: '100%',
-                height: 50,
-                borderRadius: 12,
-                border: '1px solid rgba(255,255,255,0.15)',
-                color: '#F5EDE0',
-                fontSize: 14,
-                fontWeight: 500,
-                textDecoration: 'none',
-                gap: 8,
-              }}
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-              App Store
-            </a>
+            {APP_STORE_LIVE && (
+              <a
+                href={APP_STORE_URL}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flex: 1,
+                  width: '100%',
+                  height: 50,
+                  borderRadius: 12,
+                  border: '1px solid rgba(255,255,255,0.15)',
+                  color: '#F5EDE0',
+                  fontSize: 14,
+                  fontWeight: 500,
+                  textDecoration: 'none',
+                  gap: 8,
+                }}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                App Store
+              </a>
+            )}
             <a
               href="https://play.google.com/store/apps/details?id=com.kinely.app"
               style={{
@@ -188,6 +207,75 @@ export function JoinPageClient({
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.04L13.18 12.97 3.14.91a1.55 1.55 0 00-.05.43v21.28c0 .16.03.3.09.42zm1.44.56l11.12-6.25-2.46-2.44L4.62 23.6zm13.38-7.51L6.04 24 17.36 17.52l.64-1.43zM20.15 11.32L17.56 9.88l-2.75 2.75 2.74 2.74 2.6-1.47c.5-.28.82-.82.82-1.4 0-.58-.32-1.12-.82-1.18zM4.62.4l8.66 8.69 2.46-2.44L4.62.4z"/></svg>
               Google Play
             </a>
+          </div>
+
+          {/* Invite code fallback — after installing from the store, the
+              deep link is lost, so the code must be entered by hand. */}
+          <div style={{
+            width: '100%',
+            maxWidth: 320,
+            marginTop: 32,
+            padding: 20,
+            borderRadius: 14,
+            border: '1px solid rgba(255,255,255,0.15)',
+            backgroundColor: 'rgba(255,255,255,0.04)',
+          }}>
+            <p style={{
+              fontSize: 14,
+              fontWeight: 600,
+              color: '#F5EDE0',
+              marginBottom: 8,
+            }}>
+              Installing Kinely first?
+            </p>
+            <p style={{
+              fontSize: 13,
+              color: 'rgba(245,237,224,0.55)',
+              lineHeight: 1.6,
+              marginBottom: 16,
+            }}>
+              After it installs, open the app, tap &ldquo;Invited by your
+              family? Enter your invite code&rdquo; on the sign-in screen,
+              and paste this code:
+            </p>
+            <div style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 8,
+            }}>
+              <code style={{
+                flex: 1,
+                minWidth: 0,
+                padding: '10px 12px',
+                borderRadius: 10,
+                backgroundColor: 'rgba(0,0,0,0.35)',
+                color: '#F5EDE0',
+                fontSize: 14,
+                fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
+                wordBreak: 'break-all',
+                userSelect: 'all',
+              }}>
+                {code}
+              </code>
+              <button
+                onClick={copyCode}
+                aria-label="Copy invite code"
+                style={{
+                  flexShrink: 0,
+                  padding: '10px 14px',
+                  borderRadius: 10,
+                  border: 'none',
+                  backgroundColor: '#B5622A',
+                  color: '#FFFFFF',
+                  fontSize: 13,
+                  fontWeight: 600,
+                  fontFamily: 'inherit',
+                  cursor: 'pointer',
+                }}
+              >
+                {copied ? 'Copied' : 'Copy'}
+              </button>
+            </div>
           </div>
 
           {/* QR code hint for desktop */}
