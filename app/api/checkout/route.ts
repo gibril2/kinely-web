@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Stripe from 'stripe'
+import { rateLimit, clientIp } from '@/lib/rate-limit'
 
 function getStripe() {
   const key = process.env.STRIPE_SECRET_KEY
@@ -26,6 +27,10 @@ const EMAIL_RE = /^[^\s@]{1,64}@[^\s@]{1,255}\.[^\s@]{2,}$/
 // when the mobile repo unfreezes.
 export async function POST(req: NextRequest) {
   try {
+    if (!rateLimit(`checkout:${clientIp(req)}`, 10, 10 * 60 * 1000)) {
+      return NextResponse.json({ error: 'Too many requests' }, { status: 429 })
+    }
+
     let body: unknown
     try {
       body = await req.json()
@@ -55,6 +60,15 @@ export async function POST(req: NextRequest) {
       )
     }
 
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL
+    if (!appUrl) {
+      console.error('Checkout error: NEXT_PUBLIC_APP_URL is not set')
+      return NextResponse.json(
+        { error: 'Checkout is not configured. Please try again shortly.' },
+        { status: 500 }
+      )
+    }
+
     const stripe = getStripe()
     const session = await stripe.checkout.sessions.create({
       mode: 'subscription',
@@ -72,8 +86,8 @@ export async function POST(req: NextRequest) {
         plan,
       },
       customer_email: customerEmail,
-      success_url: `${process.env.NEXT_PUBLIC_APP_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/subscribe`,
+      success_url: `${appUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${appUrl}/subscribe`,
       allow_promotion_codes: true,
       billing_address_collection: 'auto',
     })

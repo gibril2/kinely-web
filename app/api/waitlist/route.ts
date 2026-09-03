@@ -1,10 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { rateLimit, clientIp } from '@/lib/rate-limit'
+
+const EMAIL_RE = /^[^\s@]{1,64}@[^\s@]{1,255}\.[^\s@]{2,}$/
 
 export async function POST(req: NextRequest) {
   try {
-    const { email } = await req.json()
+    if (!rateLimit(`waitlist:${clientIp(req)}`, 5, 10 * 60 * 1000)) {
+      return NextResponse.json({ error: 'Too many requests' }, { status: 429 })
+    }
 
-    if (!email || !email.includes('@')) {
+    let body: unknown
+    try {
+      body = await req.json()
+    } catch {
+      return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
+    }
+    const { email } = (body ?? {}) as Record<string, unknown>
+
+    if (typeof email !== 'string' || email.length > 254 || !EMAIL_RE.test(email)) {
       return NextResponse.json({ error: 'Invalid email' }, { status: 400 })
     }
 

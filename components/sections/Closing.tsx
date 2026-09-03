@@ -4,6 +4,7 @@ import { WaitlistForm } from '../ui/WaitlistForm'
 export function Closing() {
   return (
     <section
+      id="waitlist"
       className="text-center"
       style={{
         background: '#2C2416',

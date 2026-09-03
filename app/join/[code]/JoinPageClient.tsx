@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 
 interface InvitePreview {
   family_name?: string
-  family_photo_url?: string
   inviter_name?: string
   valid: boolean
 }
@@ -84,22 +83,6 @@ export function JoinPageClient({
       }}>
         Kinely
       </h1>
-
-      {/* Family photo */}
-      {valid && preview?.family_photo_url && (
-        <img
-          src={preview.family_photo_url}
-          alt={familyName ?? 'Family'}
-          style={{
-            width: 80,
-            height: 80,
-            borderRadius: 40,
-            objectFit: 'cover',
-            marginBottom: 24,
-            border: '3px solid rgba(181,98,42,0.3)',
-          }}
-        />
-      )}
 
       {/* Headline */}
       <h2 style={{

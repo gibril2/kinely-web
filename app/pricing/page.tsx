@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { Lock } from 'lucide-react'
@@ -221,13 +222,13 @@ export default function PricingPage() {
                     ))}
                   </ul>
 
-                  <a
-                    href="#waitlist"
+                  <Link
+                    href="/#waitlist"
                     className="font-dm-sans font-medium text-[14px] text-center rounded-pill py-3.5 px-6 transition-all duration-200 hover:-translate-y-px"
                     style={{ backgroundColor: 'rgba(44,36,22,0.08)', color: '#2C2416' }}
                   >
                     Join the waitlist &rarr;
-                  </a>
+                  </Link>
                 </div>
               </div>
             ) : (

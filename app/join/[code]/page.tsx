@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { cache } from 'react'
 import { createClient } from '@supabase/supabase-js'
 import { JoinPageClient } from './JoinPageClient'
 
@@ -9,15 +10,35 @@ interface Props {
   params: Promise<{ code: string }>
 }
 
-async function getInvitePreview(code: string) {
+// Only these fields cross into the client component / RSC payload — the RPC
+// also returns family_id, invite row id, status, and invitee name, which a
+// forwarded link holder has no business seeing.
+const getInvitePreview = cache(async (code: string) => {
   if (!supabaseUrl || !supabaseAnonKey) return null
   const supabase = createClient(supabaseUrl, supabaseAnonKey)
   const { data, error } = await supabase.rpc('get_invite_preview', {
     p_invite_code: code,
   })
   if (error || !data) return null
-  return data as { family_name?: string; family_photo_url?: string; inviter_name?: string; valid: boolean }
-}
+  const raw = data as {
+    valid?: boolean
+    status?: string
+    expires_at?: string | null
+    family_name?: string
+    inviter_name?: string
+  }
+  // The RPC reports valid=true whenever the row exists; pending + unexpired
+  // is what actually counts (mirrors mobile's useInviteLookup).
+  const valid =
+    raw.valid === true &&
+    raw.status === 'pending' &&
+    (!raw.expires_at || new Date(raw.expires_at) > new Date())
+  return {
+    valid,
+    family_name: raw.family_name,
+    inviter_name: raw.inviter_name,
+  }
+})
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { code } = await params
