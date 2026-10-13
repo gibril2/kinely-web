@@ -2,6 +2,7 @@
 
 import { useState, Suspense } from 'react'
 import Link from 'next/link'
+import { KinelyLogo } from '@/components/ui/Logo'
 import { useSearchParams } from 'next/navigation'
 
 const PRICES = {
@@ -31,9 +32,8 @@ function MissingFamilyFallback() {
       style={{ backgroundColor: '#0D0D0D' }}>
 
       <div className="mb-12 text-center">
-        <h1 className="font-cormorant text-[32px] font-semibold tracking-tight"
-          style={{ color: '#F5F0E8' }}>
-          Kinely
+        <h1 className="flex justify-center">
+          <KinelyLogo size="lg" onDark />
         </h1>
         <p className="text-[15px] mt-2" style={{ color: 'rgba(245,240,232,0.4)' }}>
           Your family story, told together
@@ -117,9 +117,8 @@ function SubscribeContent() {
 
       {/* Logo */}
       <div className="mb-12 text-center">
-        <h1 className="font-cormorant text-[32px] font-semibold tracking-tight"
-          style={{ color: '#F5F0E8' }}>
-          Kinely
+        <h1 className="flex justify-center">
+          <KinelyLogo size="lg" onDark />
         </h1>
         <p className="text-[15px] mt-2" style={{ color: 'rgba(245,240,232,0.4)' }}>
           Your family story, told together

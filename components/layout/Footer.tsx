@@ -13,7 +13,7 @@ export function Footer() {
     >
       <div className="max-w-content mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="flex flex-col md:flex-row items-center gap-6">
-          <KinelyLogo size="sm" muted />
+          <KinelyLogo size="sm" onDark />
           <div className="flex items-center gap-4">
             <Link
               href="/privacy"

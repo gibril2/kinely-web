@@ -1,22 +1,31 @@
+import Image from 'next/image'
+import onDarkSrc from '@/public/brand/wordmark-on-dark.png'
+import onLightSrc from '@/public/brand/wordmark-on-light.png'
+
 interface LogoProps {
   size?: 'sm' | 'md' | 'lg'
-  muted?: boolean
+  // Dark backgrounds get the cream speech bubble (brand "dark mode" mark);
+  // light backgrounds need the ember bubble or it disappears into the cream.
+  onDark?: boolean
 }
 
-const sizes = {
-  sm: 'text-[22px]',
-  md: 'text-[26px]',
-  lg: 'text-[32px]',
+// Rendered height in px; width follows the artwork's aspect ratio.
+const heights = {
+  sm: 28,
+  md: 34,
+  lg: 48,
 }
 
-export function KinelyLogo({ size = 'md', muted = false }: LogoProps) {
+export function KinelyLogo({ size = 'md', onDark = false }: LogoProps) {
+  const src = onDark ? onDarkSrc : onLightSrc
+  const height = heights[size]
   return (
-    <span
-      className={`font-cormorant font-medium ${sizes[size]} tracking-[0.02em] ${
-        muted ? 'text-white/35' : 'text-charcoal'
-      }`}
-    >
-      kin<span className="text-ember">e</span>ly
-    </span>
+    <Image
+      src={src}
+      alt="Kinely"
+      height={height}
+      width={Math.round((height * src.width) / src.height)}
+      priority={size !== 'sm'}
+    />
   )
 }

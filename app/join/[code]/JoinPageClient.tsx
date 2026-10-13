@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { KinelyLogo } from '@/components/ui/Logo'
 
 interface InvitePreview {
   family_name?: string
@@ -73,15 +74,8 @@ export function JoinPageClient({
       fontFamily: 'var(--font-dm-sans), system-ui, sans-serif',
     }}>
       {/* Wordmark */}
-      <h1 style={{
-        fontFamily: 'var(--font-cormorant), Georgia, serif',
-        fontSize: 40,
-        fontWeight: 400,
-        color: '#B5622A',
-        marginBottom: 48,
-        letterSpacing: 1,
-      }}>
-        Kinely
+      <h1 style={{ marginBottom: 48 }}>
+        <KinelyLogo size="lg" onDark />
       </h1>
 
       {/* Headline */}
