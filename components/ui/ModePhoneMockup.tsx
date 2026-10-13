@@ -1,6 +1,7 @@
 'use client'
 
 import { VoiceWaveform } from './VoiceWaveform'
+import { KinelyLogo } from './Logo'
 
 const avatarColors: Record<string, string> = {
   M: '#7B5230',
@@ -70,9 +71,7 @@ function PhoneShell({ children }: { children: React.ReactNode }) {
 function TopBar({ right }: { right: string }) {
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 16px 10px' }}>
-      <span style={{ fontFamily: 'var(--font-cormorant)', fontSize: 16, fontWeight: 500, color: '#2C2416', letterSpacing: '0.02em' }}>
-        kin<span style={{ color: '#C4541A' }}>e</span>ly
-      </span>
+      <KinelyLogo size="xs" />
       <span style={{ fontFamily: 'var(--font-dm-sans)', fontSize: 9, color: '#7A6E5E', letterSpacing: '0.04em' }}>{right}</span>
     </div>
   )

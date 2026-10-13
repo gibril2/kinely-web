@@ -3,7 +3,7 @@ import onDarkSrc from '@/public/brand/wordmark-on-dark.png'
 import onLightSrc from '@/public/brand/wordmark-on-light.png'
 
 interface LogoProps {
-  size?: 'sm' | 'md' | 'lg'
+  size?: 'xs' | 'sm' | 'md' | 'lg'
   // Dark backgrounds get the cream speech bubble (brand "dark mode" mark);
   // light backgrounds need the ember bubble or it disappears into the cream.
   onDark?: boolean
@@ -11,6 +11,7 @@ interface LogoProps {
 
 // Rendered height in px; width follows the artwork's aspect ratio.
 const heights = {
+  xs: 18, // phone-mockup top bars
   sm: 28,
   md: 34,
   lg: 48,
@@ -25,7 +26,7 @@ export function KinelyLogo({ size = 'md', onDark = false }: LogoProps) {
       alt="Kinely"
       height={height}
       width={Math.round((height * src.width) / src.height)}
-      priority={size !== 'sm'}
+      priority={size === 'md' || size === 'lg'}
     />
   )
 }
