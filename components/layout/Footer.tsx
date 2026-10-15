@@ -1,39 +1,64 @@
 import { KinelyLogo } from '../ui/Logo'
 import Link from 'next/link'
 
+export const CONTACT_EMAIL = 'hello@kinely.app'
+
+const linkClass =
+  'font-dm-sans font-light text-[13px] text-white/55 hover:text-white/85 transition-colors whitespace-nowrap'
+
+const pages = [
+  { href: '/the-book', label: 'The book' },
+  { href: '/pricing', label: 'Pricing' },
+  { href: '/about', label: 'About' },
+]
+
+const legal = [
+  { href: '/privacy', label: 'Privacy' },
+  { href: '/terms', label: 'Terms' },
+  { href: '/delete-account', label: 'Delete your account' },
+]
+
 export function Footer() {
   return (
-    <footer
-      className="border-t"
-      style={{
-        background: '#2C2416',
-        borderColor: 'rgba(255,255,255,0.05)',
-        padding: '28px 56px',
-      }}
-    >
-      <div className="max-w-content mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-        <div className="flex flex-col md:flex-row items-center gap-6">
-          <KinelyLogo size="sm" onDark />
-          <div className="flex items-center gap-4">
-            <Link
-              href="/privacy"
-              className="font-dm-sans font-light text-[11px] text-white/25 hover:text-white/50 transition-colors"
-            >
-              Privacy
-            </Link>
-            <Link
-              href="/terms"
-              className="font-dm-sans font-light text-[11px] text-white/25 hover:text-white/50 transition-colors"
-            >
-              Terms
-            </Link>
+    <footer className="border-t border-white/5 bg-night px-4 sm:px-8 pt-12 pb-8">
+      <div className="max-w-content mx-auto">
+        <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
+          <div className="space-y-4">
+            <KinelyLogo size="sm" onDark />
+            <p className="font-dm-sans font-light text-[14px] text-white/55">
+              Questions or ideas?{' '}
+              <a
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="text-white/80 underline decoration-white/25 underline-offset-4 hover:text-white transition-colors"
+              >
+                {CONTACT_EMAIL}
+              </a>
+            </p>
           </div>
+          <nav aria-label="Footer" className="flex gap-14">
+            <ul className="space-y-3">
+              {pages.map(({ href, label }) => (
+                <li key={href}>
+                  <Link href={href} className={linkClass}>
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <ul className="space-y-3">
+              {legal.map(({ href, label }) => (
+                <li key={href}>
+                  <Link href={href} className={linkClass}>
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
         </div>
-        <div className="flex flex-col items-end gap-1 text-center md:text-right">
-          <p className="font-dm-sans font-light text-[12px] text-white/[0.18]">
-            © 2025 Kinely Inc. · Built for families, by people who love theirs.
-          </p>
-        </div>
+        <p className="mt-12 border-t border-white/5 pt-6 font-dm-sans font-light text-[12px] text-white/40">
+          © {new Date().getFullYear()} Kinely Inc. · Built for the people closest to you.
+        </p>
       </div>
     </footer>
   )

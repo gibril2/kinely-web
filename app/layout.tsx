@@ -16,24 +16,24 @@ const cormorant = Cormorant_Garamond({
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
-  weight: ['300', '400', '500'],
+  weight: ['300', '400', '500', '600'],
   variable: '--font-dm-sans',
   display: 'swap',
 })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://kinely.com'),
-  title: 'Kinely — Your Family\'s Story, Every Day',
-  description: 'One question. Every day. Every answer saved forever. Kinely keeps your family connected across every distance and every season of life. Join our founding families.',
+  title: 'Kinely — One question a day for your people',
+  description: 'Kinely is a private app that asks the people closest to you one question a day. Everyone answers in words, voice, or photos, and every answer is kept.',
   openGraph: {
-    title: 'Kinely — Your Family\'s Story, Every Day',
+    title: 'Kinely — One question a day for your people',
     description: 'One question. Every day. Every answer saved forever.',
     type: 'website',
     images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Kinely — Your Family\'s Story, Every Day',
+    title: 'Kinely — One question a day for your people',
     images: ['/og-image.jpg'],
   },
 }

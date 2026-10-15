@@ -1,6 +1,10 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
+  // The How it works page was folded into the home page (demo section + Fair questions).
+  async redirects() {
+    return [{ source: '/how-it-works', destination: '/#how-it-works', permanent: true }]
+  },
   async headers() {
     return [
       {

@@ -32,14 +32,53 @@ body::after {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.025'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.025;
+  opacity: 0.05;
+}
+
+/* Late-afternoon light falling into a section, like the window light in the hero photo. */
+.window-light {
+  background-image:
+    radial-gradient(ellipse 60% 55% at 85% 0%, rgba(232, 150, 80, 0.16), transparent 70%),
+    radial-gradient(ellipse 45% 40% at 0% 100%, rgba(196, 84, 26, 0.08), transparent 70%);
+}
+.window-light-dark {
+  background-image:
+    radial-gradient(ellipse 55% 60% at 80% 10%, rgba(232, 150, 80, 0.14), transparent 70%),
+    radial-gradient(ellipse 40% 45% at 10% 95%, rgba(181, 98, 42, 0.10), transparent 70%);
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/* Demo answer dropping into place after "Share". */
+@keyframes settle {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Hero entrance: plays once on load, never on scroll. */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* FAQ answers slide open instead of snapping. Browsers without
+   interpolate-size keep the instant open, which is fine. */
+@supports (interpolate-size: allow-keywords) {
+  .faq { interpolate-size: allow-keywords; }
+  .faq details::details-content {
+    height: 0;
+    overflow: clip;
+    transition: height 260ms cubic-bezier(0.22, 1, 0.36, 1), content-visibility 260ms allow-discrete;
+  }
+  .faq details[open]::details-content { height: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .faq details::details-content { transition: none; }
 }

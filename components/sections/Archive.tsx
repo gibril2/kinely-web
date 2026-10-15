@@ -1,186 +1,48 @@
-import { SectionKicker } from '../ui/SectionKicker'
-
-const avatarColors: Record<string, string> = {
-  M: '#7B5230',
-  E: '#C4541A',
-  J: '#C4962A',
-}
-
-function ArchiveAvatar({ initial }: { initial: string }) {
-  return (
-    <div
-      className="flex-shrink-0 flex items-center justify-center text-warm-white rounded-full"
-      style={{
-        width: 22,
-        height: 22,
-        background: avatarColors[initial],
-        fontSize: 9,
-        fontFamily: 'var(--font-dm-sans)',
-        fontWeight: 500,
-      }}
-    >
-      {initial}
-    </div>
-  )
-}
+import Link from 'next/link'
+import Image from 'next/image'
+import bookPhoto from '@/public/images/book-golden-hour.png'
 
 export function Archive() {
   return (
-    <section
-      id="archive"
-      className="max-w-content mx-auto"
-      style={{
-        padding: '100px 56px',
-        borderTop: '1px solid rgba(44,36,22,0.07)',
-      }}
-    >
-      <div className="grid md:grid-cols-2 items-center" style={{ gap: 80 }}>
-        {/* Left */}
+    <section id="archive" className="bg-cream window-light px-4 sm:px-8 py-24 md:py-32">
+      <div className="max-w-content mx-auto grid gap-14 md:gap-20 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] items-center">
         <div>
-          <SectionKicker label="The archive" />
-
-          <div className="relative">
-            {/* Decorative quote mark */}
-            <span
-              className="absolute font-cormorant select-none"
-              style={{
-                fontSize: 120,
-                color: 'rgba(196,84,26,0.12)',
-                top: -40,
-                left: -20,
-                lineHeight: 1,
-                fontFamily: 'var(--font-cormorant)',
-              }}
-            >
-              &ldquo;
-            </span>
-            <blockquote
-              className="relative font-cormorant font-normal italic text-charcoal"
-              style={{
-                fontSize: 'clamp(28px, 3vw, 42px)',
-                lineHeight: 1.25,
-                paddingLeft: 12,
-              }}
-            >
-              The conversations that shape
-              <br />
-              who your family becomes —
-              <br />
-              <em style={{ color: '#C4541A' }}>now you&apos;ll always have them.</em>
-            </blockquote>
-          </div>
-
-          <p
-            className="font-dm-sans font-light text-charcoal-lt mt-7"
-            style={{ fontSize: 15, lineHeight: 1.65, maxWidth: 380 }}
+          <h2
+            className="font-cormorant font-normal text-charcoal max-w-[13ch] mb-8"
+            style={{ fontSize: 'clamp(2.5rem, 5vw, 4.25rem)', lineHeight: 1.02, letterSpacing: '-0.01em' }}
           >
-            Every answer is saved forever — searchable, filterable, beautifully
-            organized. Type &ldquo;embarrassing&rdquo; and surface every answer your family
-            ever gave to that topic. Open the archive in five years and hear your
-            child&apos;s voice at age nine. The Annual Book is built from everything
-            you share all year.
-          </p>
+            A year of answers, kept in one place.
+          </h2>
+          <div className="space-y-5 max-w-[44ch] font-dm-sans font-light text-[17px] leading-[1.75] text-charcoal-mid">
+            <p>
+              Each day&apos;s question is saved with everyone&apos;s answers, photos and voice notes. Scroll back to any
+              day, or search for a name or a word.
+            </p>
+            <p>
+              At the end of the year you can have it printed as a book. We&apos;re putting together the first ones by
+              hand this December.
+            </p>
+          </div>
+          <Link
+            href="/the-book"
+            className="inline-block mt-8 font-dm-sans font-medium text-[15px] text-ember underline decoration-ember/30 underline-offset-[6px] hover:decoration-ember transition-colors whitespace-nowrap"
+          >
+            About the book
+          </Link>
         </div>
 
-        {/* Right: Archive preview card */}
-        <div
-          style={{
-            background: '#2C2416',
-            borderRadius: 24,
-            padding: 36,
-          }}
-        >
-          {/* Entry 1 */}
-          <div className="mb-6">
-            <p
-              className="font-dm-sans uppercase tracking-[0.08em] mb-3"
-              style={{ fontSize: 9, color: 'rgba(255,255,255,0.25)' }}
-            >
-              March 4, 2024 · One year ago
-            </p>
-            <p
-              className="font-cormorant italic mb-4"
-              style={{ fontSize: 15, color: 'rgba(255,255,255,0.75)', lineHeight: 1.4 }}
-            >
-              &ldquo;What&apos;s something you&apos;re secretly really good at?&rdquo;
-            </p>
-            <div className="flex flex-col gap-2">
-              {[
-                { initial: 'M', name: 'Mom', text: "Parallel parking — I've never once needed a three-point turn in my life. Your dad still doesn't believe me. Also, I'm pretty good at knowing when someone in this family needs a hug before they know it themselves." },
-                { initial: 'E', name: 'Emma · was 13', text: "I can memorize a full song after hearing it twice. I think it's because music is how I feel things. On the way to school last Tuesday I learned all of Driver's License before we hit the highway." },
-              ].map(({ initial, name, text }) => (
-                <div
-                  key={name}
-                  className="flex items-start gap-3"
-                  style={{
-                    background: 'rgba(255,255,255,0.04)',
-                    borderRadius: 10,
-                    padding: '9px 12px',
-                  }}
-                >
-                  <ArchiveAvatar initial={initial} />
-                  <div>
-                    <p className="font-dm-sans font-medium text-white/60" style={{ fontSize: 10, marginBottom: 2 }}>
-                      {name}
-                    </p>
-                    <p className="font-dm-sans font-light text-white/45" style={{ fontSize: 12, lineHeight: 1.7 }}>
-                      {text}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Divider */}
-          <div style={{ height: 1, background: 'rgba(255,255,255,0.05)', marginBottom: 24 }} />
-
-          {/* Entry 2 */}
-          <div>
-            <p
-              className="font-dm-sans uppercase tracking-[0.08em] mb-3"
-              style={{ fontSize: 9, color: 'rgba(255,255,255,0.25)' }}
-            >
-              December 25, 2023
-            </p>
-            <p
-              className="font-cormorant italic mb-4"
-              style={{ fontSize: 15, color: 'rgba(255,255,255,0.75)', lineHeight: 1.4 }}
-            >
-              &ldquo;What was the best part of this year?&rdquo;
-            </p>
-            <div
-              className="flex items-start gap-3"
-              style={{
-                background: 'rgba(255,255,255,0.04)',
-                borderRadius: 10,
-                padding: '9px 12px',
-              }}
-            >
-              <div
-                className="flex-shrink-0 flex items-center justify-center text-warm-white rounded-full"
-                style={{
-                  width: 22,
-                  height: 22,
-                  background: '#C4962A',
-                  fontSize: 9,
-                  fontFamily: 'var(--font-dm-sans)',
-                  fontWeight: 500,
-                }}
-              >
-                J
-              </div>
-              <div>
-                <p className="font-dm-sans font-medium text-white/60" style={{ fontSize: 10, marginBottom: 2 }}>
-                  Jake · was 8
-                </p>
-                <p className="font-dm-sans font-light text-white/45" style={{ fontSize: 12, lineHeight: 1.5 }}>
-                  When dad came home three days early from his work trip and surprised us. We didn&apos;t even do anything special — just pizza and blankets on the living room floor. But it felt like the best night of the whole year.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <figure className="min-w-0">
+          <Image
+            src={bookPhoto}
+            alt="The printed book open on a table beside a phone showing the same day's question in the app"
+            sizes="(min-width: 768px) 55vw, 100vw"
+            placeholder="blur"
+            className="w-full h-auto rounded-[22px] shadow-[0_40px_80px_-35px_rgba(68,40,18,0.6)]"
+          />
+          <figcaption className="mt-4 font-dm-sans text-[13px] text-charcoal-lt">
+            A concept for the printed book. The design isn&apos;t final, and the people and answers are made up.
+          </figcaption>
+        </figure>
       </div>
     </section>
   )

@@ -21,6 +21,19 @@ const config: Config = {
         'charcoal-lt': '#7A6E5E',
         gold: '#C4962A',
         'warm-white': '#FDFAF5',
+        // The app's dark Today screen (apps/mobile/constants/colors-palette.ts darkColors).
+        // Used where the site shows the product itself, so it matches the phone.
+        night: '#1A1A1A',
+        'night-surface': '#242424',
+        'night-text': '#F5EDE0',
+        'night-muted': '#8C8884',
+        'app-accent': '#B5622A',
+        // Warm surfaces pulled from the hero photo (lamp-lit room, linen, terracotta),
+        // so sections below the fold feel like the same room rather than a blank page.
+        lamp: '#17120E',
+        linen: '#EEE3D2',
+        paper: '#FBF6EE',
+        'ember-deep': '#86381A',
       },
       fontFamily: {
         cormorant: ['var(--font-cormorant)', 'Georgia', 'serif'],

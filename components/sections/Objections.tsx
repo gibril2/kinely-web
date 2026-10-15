@@ -1,46 +1,65 @@
+import { Plus } from 'lucide-react'
+
 const objections = [
   {
-    q: '"My family won\'t actually do this."',
-    a: "You don't need everyone on board from day one. One person starts. Others get a notification. Most families find that the question itself does the convincing — because it's specific, unexpected, and takes 90 seconds to answer.",
+    q: 'What if nobody else joins in?',
+    a: 'You don’t need everyone on day one. One person starts the circle and invites the others. Everyone gets a notification when the question arrives, and a good question is usually enough to get people answering.',
   },
   {
-    q: '"We\'ll start and then forget."',
-    a: "Kinely is designed for real life. Miss a day — or a week — and your archive is still there. The question still comes the next day. There's no streak to break and no guilt. Just the next question, waiting when you're ready.",
+    q: 'What if we forget to answer?',
+    a: 'Nothing is lost. Skip a day or a week, and your archive stays put. A new question still arrives the next day.',
   },
   {
-    q: '"Is this just another app fighting for our attention?"',
-    a: "It's three minutes a day. We designed it to put the phone down, not pick it up more. The whole point is the conversation it starts — not the screen time it adds.",
+    q: 'What kind of questions does it ask?',
+    a: 'Close to a thousand of them: childhood memories, funny hypotheticals, values, the year so far. No question repeats until your circle has been through the whole library, and some are saved for holidays and birthdays.',
+  },
+  {
+    q: 'Can we answer together, in the same room?',
+    a: 'Yes. Gather Mode puts the question on one phone in the middle of the table, and each person records their answer in turn. You can also invite a guest to answer that day’s question with you.',
+  },
+  {
+    q: 'Can someone join later?',
+    a: 'Anytime. Anyone who joins later can scroll back through everything the circle has answered since it started.',
+  },
+  {
+    q: 'Is this another app that eats our time?',
+    a: 'It’s one question a day. Answer it and you’re done: no feed, no likes, no ads. Often the best part happens later, when someone brings up an answer at dinner.',
+  },
+  {
+    q: 'Who can see what we write?',
+    a: 'Only the people in your circle. Nothing is public, nothing is sold, and you can delete your account and everything in it at any time.',
   },
 ]
 
+// Compact FAQ: questions only, each answer opens in place. Native <details>, so it is
+// keyboard and screen-reader friendly with no script; name="faq" keeps one open at a time.
 export function Objections() {
   return (
-    <section style={{ borderTop: '1px solid rgba(44,36,22,0.07)' }}>
-      <div className="max-w-content mx-auto" style={{ padding: '100px 56px' }}>
-        <div className="flex items-center gap-3 mb-12 text-ember">
-          <div className="w-[18px] h-px bg-ember" />
-          <span className="font-dm-sans font-medium text-[11px] uppercase tracking-[0.1em]">Common questions</span>
+    <section id="questions" className="bg-linen px-4 sm:px-8 py-24 md:py-28">
+      <div className="max-w-content mx-auto grid gap-10 lg:gap-20 lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)]">
+        <div>
+          <h2
+            className="font-cormorant font-normal text-charcoal mb-5"
+            style={{ fontSize: 'clamp(2.25rem, 4.4vw, 3.5rem)', lineHeight: 1.05 }}
+          >
+            You might be wondering
+          </h2>
+          <p className="font-dm-sans font-light text-[17px] leading-[1.7] text-charcoal-mid max-w-[34ch]">
+            The short answers. Tap a question to open it.
+          </p>
         </div>
 
-        <div className="flex flex-col" style={{ gap: 0 }}>
-          {objections.map(({ q, a }, i) => (
-            <div
-              key={i}
-              className="grid md:grid-cols-2"
-              style={{
-                gap: 48,
-                padding: '44px 0',
-                borderTop: i === 0 ? '1px solid rgba(44,36,22,0.07)' : '1px solid rgba(44,36,22,0.07)',
-                borderBottom: i === objections.length - 1 ? '1px solid rgba(44,36,22,0.07)' : undefined,
-              }}
-            >
-              <p className="font-cormorant font-normal text-charcoal" style={{ fontSize: 'clamp(22px, 2.5vw, 30px)', lineHeight: 1.25 }}>
-                {q}
-              </p>
-              <p className="font-dm-sans font-light text-charcoal-lt" style={{ fontSize: 16, lineHeight: 1.8 }}>
-                {a}
-              </p>
-            </div>
+        <div className="faq border-t border-charcoal/15">
+          {objections.map(({ q, a }) => (
+            <details key={q} name="faq" className="group border-b border-charcoal/15">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 [&::-webkit-details-marker]:hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ember rounded-sm">
+                <span className="font-cormorant font-medium text-charcoal text-[22px] sm:text-[24px] leading-[1.25]">{q}</span>
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-charcoal/20 text-charcoal-mid transition-transform duration-200 ease-out group-open:rotate-45 motion-reduce:transition-none" aria-hidden>
+                  <Plus size={16} />
+                </span>
+              </summary>
+              <p className="pb-6 pr-12 font-dm-sans font-light text-[16px] leading-[1.75] text-charcoal-mid max-w-[58ch]">{a}</p>
+            </details>
           ))}
         </div>
       </div>

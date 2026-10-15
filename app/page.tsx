@@ -1,37 +1,35 @@
+/* Hallmark · macrostructure: Marquee Hero (hero = the app's Today screen) · genre: editorial
+ * theme: custom (existing kinely tokens + app night palette) · paper: cream #F7F2EA · accent: ember
+ * display: Cormorant Garamond (keepsake voice) + DM Sans 600 (app voice) · body: DM Sans
+ * sections: Today hero · Answer-first demo (tap to reveal) · Reveal · Voices · Archive · Fair questions · Close (C2 form)
+ * nav: N10-style dark→cream on scroll · footer: existing minimal · enrichment: real-UI fragments, no phone chrome
+ * motion: none added (site spec forbids scroll/intersection animation)
+ */
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { Hero } from '@/components/sections/Hero'
-import { Statement } from '@/components/sections/Statement'
-import { Photography } from '@/components/sections/Photography'
-import { HowItWorks } from '@/components/sections/HowItWorks'
-import { GrandparentsFeature } from '@/components/sections/GrandparentsFeature'
-import { DailyEntry } from '@/components/sections/DailyEntry'
-import { Modes } from '@/components/sections/Modes'
-import { PhotographyBreak } from '@/components/sections/PhotographyBreak'
+import { AnswerFirst } from '@/components/sections/AnswerFirst'
+import { DemoAnswerProvider } from '@/components/ui/DemoAnswer'
+import { Reveal } from '@/components/sections/Reveal'
+import { Voices } from '@/components/sections/Voices'
 import { Archive } from '@/components/sections/Archive'
-import { AnnualBook } from '@/components/sections/AnnualBook'
-import { Testimonials } from '@/components/sections/Testimonials'
-import { Closing } from '@/components/sections/Closing'
 import { Objections } from '@/components/sections/Objections'
+import { Closing } from '@/components/sections/Closing'
 
 export default function HomePage() {
   return (
     <>
-      <Navbar />
+      <Navbar overDark />
       <main>
         <Hero />
-        <Statement />
-        <Photography />
-        <HowItWorks />
-        <GrandparentsFeature />
-        <DailyEntry />
-        <Modes />
-        <PhotographyBreak />
+        <DemoAnswerProvider>
+          <AnswerFirst />
+          <Reveal />
+        </DemoAnswerProvider>
+        <Voices />
         <Archive />
-        <AnnualBook />
-        <Testimonials />
-        <Closing />
         <Objections />
+        <Closing />
       </main>
       <Footer />
     </>
