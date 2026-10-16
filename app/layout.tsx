@@ -22,7 +22,7 @@ const dmSans = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://kinely.com'),
+  metadataBase: new URL('https://kinely.app'),
   title: 'Kinely — A little closer, every day.',
   description: 'Kinely is a private app that asks the people closest to you one question a day. Everyone answers in words, voice, or photos, and every answer is kept.',
   openGraph: {
@@ -34,6 +34,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Kinely — A little closer, every day.',
+    description: 'One question a day for the people closest to you. Everyone answers, and every answer is kept.',
     images: ['/og-image.jpg'],
   },
 }

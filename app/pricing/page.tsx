@@ -35,7 +35,7 @@ function DaysTogether() {
   return (
     <div className="flex gap-1.5" aria-hidden>
       {Array.from({ length: 7 }, (_, i) => (
-        <span key={i} className="h-2.5 w-2.5 rounded-full bg-ember" style={{ opacity: 0.35 + i * 0.1 }} />
+        <span key={i} className="h-2.5 w-2.5 rounded-full bg-ember" />
       ))}
     </div>
   )
