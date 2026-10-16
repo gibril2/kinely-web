@@ -1,5 +1,6 @@
 import Image from 'next/image'
-import heroPhoto from '@/public/images/hero-phone-desk.png'
+// Hero photo. Previous version: hero-phone-desk.png (same framing); swap the import back to revert.
+import heroPhoto from '@/public/images/hero-phone-desk-v2.png'
 import { GetTheApp } from '../ui/GetTheApp'
 
 // Photo of the real Today screen on a desk. The photo's left half is dark

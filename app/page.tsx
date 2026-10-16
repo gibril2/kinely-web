@@ -19,7 +19,7 @@ import { Closing } from '@/components/sections/Closing'
 export default function HomePage() {
   return (
     <>
-      <Navbar overDark />
+      <Navbar overDark clearOverDark />
       <main>
         <Hero />
         <DemoAnswerProvider>

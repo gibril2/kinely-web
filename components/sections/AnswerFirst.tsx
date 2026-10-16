@@ -6,7 +6,7 @@ import { AppAvatar } from '../ui/AppBits'
 import { useDemoAnswer } from '../ui/DemoAnswer'
 
 const QUESTION = 'What was your favorite meal growing up, and who made it?'
-const STARTER = 'My mom’s chicken alfredo. It beats lasagna, and that’s saying something.'
+const STARTER = 'My mom’s chicken alfredo, with lasagna a close second.'
 
 // Everyone else's answers, as they appear once the visitor has shared theirs.
 const OTHERS = [
