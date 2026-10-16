@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   description: 'Kinely is a private app that asks the people closest to you one question a day. Everyone answers in words, voice, or photos, and every answer is kept.',
   openGraph: {
     title: 'Kinely — A little closer, every day.',
-    description: 'One question. Every day. Every answer saved forever.',
+    description: 'One question a day for the people closest to you. Everyone answers, and every answer is kept.',
     type: 'website',
     images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
   },
