@@ -14,15 +14,32 @@ const INCLUDED = [
   { icon: ShieldCheck, text: 'No ads, no public feed, nothing sold' },
 ]
 
-// An example circle: the first person pays, everyone else joins free.
-const CIRCLE = [
-  { name: 'You', tint: '#B5622A' },
-  { name: 'Mom', tint: '#7B5230' },
-  { name: 'Dad', tint: '#5C7A5F' },
-  { name: 'Maya', tint: '#4A6B8A' },
-  { name: 'Theo', tint: '#8A5A6B' },
-  { name: 'Nana', tint: '#6B6250' },
+// Pricing model from .vault/decisions/2026-10-15-kinely-trial-freeze-retention.md.
+// A "day together" is a day where at least two people in the circle answered.
+const STEPS = [
+  {
+    title: 'Start free',
+    body: 'Invite your people and start answering. Nobody is asked to pay until your circle has had seven days together, meaning days when at least two of you answered. If it takes a month to get everyone on board, that’s fine.',
+  },
+  {
+    title: 'One person pays',
+    body: 'After that, anyone in the circle can cover it. $6.99 a month keeps the questions coming for everyone, and everyone else stays free.',
+  },
+  {
+    title: 'Stop anytime, keep everything',
+    body: 'If nobody pays, new questions pause and your archive turns read-only. Every answer, voice note, and photo is still there to look back on and download. Pay again and it picks up where you left off.',
+  },
 ]
+
+function DaysTogether() {
+  return (
+    <div className="flex gap-1.5" aria-hidden>
+      {Array.from({ length: 7 }, (_, i) => (
+        <span key={i} className="h-2.5 w-2.5 rounded-full bg-ember" style={{ opacity: 0.35 + i * 0.1 }} />
+      ))}
+    </div>
+  )
+}
 
 // Same room as the About letter: a lamp-lit head, then one paper sheet that
 // overlaps down into the light and carries the whole offer.
@@ -41,6 +58,9 @@ export default function PricingPage() {
             >
               One price for the whole circle.
             </h1>
+            <p className="mt-6 font-dm-sans font-light text-[18px] leading-[1.6] text-night-text/75">
+              Free to start. Nobody pays until it&apos;s working.
+            </p>
           </div>
         </section>
 
@@ -56,9 +76,10 @@ export default function PricingPage() {
             <div className="px-6 py-10 sm:px-12 sm:py-14 md:border-r border-charcoal/10">
               <p className="font-cormorant leading-none text-[88px] sm:text-[104px] tracking-[-0.02em]">$6.99</p>
               <p className="mt-3 font-dm-sans text-[16px] text-charcoal-lt">a month, for your whole circle</p>
-              <p className="mt-8 mb-10 max-w-[34ch] font-dm-sans font-light text-[17px] leading-[1.7] text-charcoal-mid">
-                One person pays. Everyone they invite joins free, up to 30 people.
-              </p>
+              <div className="mt-8 mb-10 flex items-center gap-4 rounded-[14px] bg-linen/70 px-5 py-4">
+                <DaysTogether />
+                <p className="font-dm-sans text-[15px] leading-[1.45] text-charcoal-mid">Free for your first seven days together</p>
+              </div>
               <GetTheApp />
             </div>
             <div className="px-6 pb-10 sm:px-12 sm:pb-14 md:py-14 border-t md:border-t-0 border-charcoal/10 pt-10">
@@ -71,52 +92,42 @@ export default function PricingPage() {
                   </li>
                 ))}
               </ul>
+              <p className="mt-8 border-t border-charcoal/10 pt-5 font-dm-sans text-[14px] text-charcoal-lt">Up to 30 people in a circle.</p>
             </div>
           </div>
         </section>
 
         <section className="bg-linen window-light px-4 sm:px-8 py-24 md:py-32">
-          <div className="max-w-content mx-auto grid gap-14 lg:gap-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] items-center">
-            <div>
-              <h2
-                className="font-cormorant font-normal text-charcoal mb-6"
-                style={{ fontSize: 'clamp(2.25rem, 4.4vw, 3.5rem)', lineHeight: 1.05 }}
-              >
-                Only one of you needs to pay.
-              </h2>
-              <p className="max-w-[44ch] font-dm-sans font-light text-[17px] leading-[1.7] text-charcoal-mid">
-                You don&apos;t need to talk anyone into a subscription. Send them the invite link and they&apos;re in. If a
-                circle of six wanted to split it, that&apos;s under $1.20 each.
-              </p>
-            </div>
-
-            <ul className="grid grid-cols-3 gap-x-4 gap-y-8 sm:gap-x-8 max-w-[440px] lg:justify-self-end w-full" aria-label="An example circle of six">
-              {CIRCLE.map(({ name, tint }, i) => (
-                <li key={name} className="flex flex-col items-center gap-3">
-                  <span
-                    className={`flex h-16 w-16 sm:h-20 sm:w-20 items-center justify-center rounded-full font-dm-sans text-[22px] sm:text-[26px] font-medium text-warm-white ${
-                      i === 0 ? 'ring-2 ring-ember ring-offset-4 ring-offset-linen' : ''
-                    }`}
-                    style={{ background: tint }}
-                    aria-hidden
-                  >
-                    {name[0]}
-                  </span>
-                  <span className="text-center font-dm-sans text-[14px] leading-tight">
-                    <span className="block font-medium text-charcoal">{name}</span>
-                    <span className={i === 0 ? 'text-ember' : 'text-charcoal-lt'}>{i === 0 ? '$6.99 a month' : 'Free'}</span>
-                  </span>
+          <div className="max-w-content mx-auto">
+            <h2
+              className="font-cormorant font-normal text-charcoal mb-14 md:mb-16 max-w-[18ch]"
+              style={{ fontSize: 'clamp(2.25rem, 4.4vw, 3.5rem)', lineHeight: 1.05 }}
+            >
+              How paying works
+            </h2>
+            <ol className="grid gap-12 md:gap-10 md:grid-cols-3">
+              {STEPS.map(({ title, body }, i) => (
+                <li key={title} className="border-t border-charcoal/15 pt-6">
+                  <p className="font-cormorant text-[44px] leading-none text-ember mb-5">{i + 1}</p>
+                  <h3 className="font-cormorant font-medium text-charcoal text-[26px] leading-[1.2] mb-3">{title}</h3>
+                  <p className="font-dm-sans font-light text-[16px] leading-[1.75] text-charcoal-mid max-w-[40ch]">{body}</p>
                 </li>
               ))}
-            </ul>
-          </div>
+            </ol>
 
-          <p className="max-w-content mx-auto mt-20 border-t border-charcoal/10 pt-8 font-dm-sans font-light text-[15px] text-charcoal-mid">
-            The printed book is separate and optional, and its price will be shown before anyone orders.{' '}
-            <Link href="/the-book" className="underline decoration-charcoal/30 underline-offset-4 hover:text-charcoal transition-colors whitespace-nowrap">
-              About the book
-            </Link>
-          </p>
+            <div className="mt-20 grid gap-6 md:grid-cols-2 border-t border-charcoal/10 pt-8 font-dm-sans font-light text-[15px] leading-[1.7] text-charcoal-mid">
+              <p>
+                A paused circle is kept for 12 months. We&apos;ll email you before anything is deleted, with a link to download
+                it all.
+              </p>
+              <p>
+                The printed book is separate and optional, and its price will be shown before anyone orders.{' '}
+                <Link href="/the-book" className="underline decoration-charcoal/30 underline-offset-4 hover:text-charcoal transition-colors whitespace-nowrap">
+                  About the book
+                </Link>
+              </p>
+            </div>
+          </div>
         </section>
       </main>
       <Footer />
