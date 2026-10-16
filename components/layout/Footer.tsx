@@ -57,7 +57,7 @@ export function Footer() {
           </nav>
         </div>
         <p className="mt-12 border-t border-white/5 pt-6 font-dm-sans font-light text-[12px] text-white/40">
-          © {new Date().getFullYear()} Kinely Inc. · Built for the people closest to you.
+          © {new Date().getFullYear()} Kinely Inc. · A little closer, every day.
         </p>
       </div>
     </footer>

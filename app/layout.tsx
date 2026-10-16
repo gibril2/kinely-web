@@ -23,17 +23,17 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://kinely.com'),
-  title: 'Kinely — One question a day for your people',
+  title: 'Kinely — A little closer, every day.',
   description: 'Kinely is a private app that asks the people closest to you one question a day. Everyone answers in words, voice, or photos, and every answer is kept.',
   openGraph: {
-    title: 'Kinely — One question a day for your people',
+    title: 'Kinely — A little closer, every day.',
     description: 'One question. Every day. Every answer saved forever.',
     type: 'website',
     images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Kinely — One question a day for your people',
+    title: 'Kinely — A little closer, every day.',
     images: ['/og-image.jpg'],
   },
 }
